@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knowledge Box</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: '#050510',
+              panel: '#0d0f1f',
+              panel2: '#12142a',
+              primary: '#8b5cf6',
+              accent: '#22d3ee',
+              edge: '#2a2d55',
+            },
+            fontFamily: {
+              display: ['Orbitron', 'sans-serif'],
+              sans: ['Sora', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      html, body { background: #050510; }
+      body {
+        background-image:
+          radial-gradient(1px 1px at 20px 30px, rgba(139,92,246,0.5), transparent),
+          radial-gradient(1px 1px at 120px 90px, rgba(34,211,238,0.4), transparent),
+          radial-gradient(1.5px 1.5px at 240px 60px, rgba(139,92,246,0.4), transparent),
+          radial-gradient(1px 1px at 320px 180px, rgba(34,211,238,0.35), transparent),
+          radial-gradient(1.5px 1.5px at 60px 200px, rgba(139,92,246,0.3), transparent),
+          radial-gradient(1px 1px at 400px 40px, rgba(255,255,255,0.3), transparent);
+        background-repeat: repeat;
+        background-size: 440px 440px;
+        animation: drift 90s linear infinite;
+      }
+      @keyframes drift {
+        from { background-position: 0 0; }
+        to { background-position: -440px 440px; }
+      }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1); opacity: 0.85; }
+        50% { transform: scale(1.12); opacity: 1; }
+      }
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes pulse-ring {
+        0% { box-shadow: 0 0 0 0 rgba(139,92,246,0.45); }
+        100% { box-shadow: 0 0 0 14px rgba(139,92,246,0); }
+      }
+      .keeper-core { animation: breathe 4.5s ease-in-out infinite; }
+      .keeper-ring { animation: spin-slow 14s linear infinite; }
+      .keeper-active { animation: pulse-ring 1.6s ease-out infinite; }
+      .glow-text { text-shadow: 0 0 12px rgba(139,92,246,0.6); }
+      .glow-border { box-shadow: 0 0 0 1px rgba(139,92,246,0.25), 0 0 24px -8px rgba(139,92,246,0.5); }
+      .thread { background: linear-gradient(180deg, rgba(139,92,246,0.55), rgba(34,211,238,0.15)); }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: #0d0f1f; }
+      ::-webkit-scrollbar-thumb { background: #2a2d55; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #3d4180; }
+    </style>
+  </head>
+  <body class="bg-void text-slate-200 antialiased font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
