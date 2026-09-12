@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>AI Investment Agent</title>
+  <meta name="description" content="A virtual AI paper-trading agent that manages a $100,000 portfolio using real live market prices." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="header-top">
+        <h1>AI Investment Agent</h1>
+        <button id="settingsBtn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+      </div>
+
+      <div class="header-stats">
+        <div class="stat stat-primary">
+          <span class="stat-label">Total Equity</span>
+          <span class="stat-value" id="statEquity">$100,000.00</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Today</span>
+          <span class="stat-value" id="statToday">$0.00 (0.00%)</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Since Inception</span>
+          <span class="stat-value" id="statReturn">0.00%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Days Left (1yr)</span>
+          <span class="stat-value" id="statDays">365</span>
+        </div>
+      </div>
+
+      <div id="statusBanner" class="status-banner hidden"></div>
+    </header>
+
+    <!-- ============ CHART ============ -->
+    <section class="card">
+      <div class="card-title">Portfolio Value</div>
+      <canvas id="equityChart" class="chart-canvas"></canvas>
+    </section>
+
+    <!-- ============ HOLDINGS ============ -->
+    <section class="card">
+      <div class="card-title">Holdings</div>
+      <div class="table-scroll">
+        <table class="data-table" id="holdingsTable">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Shares</th>
+              <th>Avg Cost</th>
+              <th>Price</th>
+              <th>P&amp;L</th>
+            </tr>
+          </thead>
+          <tbody id="holdingsBody">
+            <tr class="empty-row"><td colspan="5">No open positions yet — the agent is watching the market.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cash-line" id="cashLine">Cash: $100,000.00</div>
+    </section>
+
+    <!-- ============ WATCHLIST ============ -->
+    <section class="card">
+      <div class="card-title">Watchlist &amp; Signals</div>
+      <div class="table-scroll">
+        <table class="data-table" id="watchlistTable">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Price</th>
+              <th>Mom.</th>
+              <th>Dev.</th>
+              <th>Vol.</th>
+              <th>Signal</th>
+            </tr>
+          </thead>
+          <tbody id="watchlistBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ TRADE JOURNAL ============ -->
+    <section class="card">
+      <div class="card-title">Trade Journal</div>
+      <div id="journalFeed" class="journal-feed">
+        <div class="empty-journal">No trades yet. The agent logs its reasoning here every time it acts.</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span id="lastUpdated">Never updated</span>
+    </footer>
+  </div>
+
+  <!-- ============ SETTINGS PANEL (slide-over) ============ -->
+  <div id="settingsOverlay" class="overlay hidden">
+    <div class="settings-panel">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button id="closeSettingsBtn" class="icon-btn" aria-label="Close">✕</button>
+      </div>
+
+      <label class="field-label" for="apiKeyInput">Finnhub API Key</label>
+      <input type="text" id="apiKeyInput" class="field-input" placeholder="Paste your Finnhub API key" autocomplete="off" spellcheck="false" />
+      <p class="field-hint">Get a free key at finnhub.io. Stored only in this browser's localStorage.</p>
+
+      <label class="field-label" for="watchlistInput">Watchlist (comma-separated tickers)</label>
+      <textarea id="watchlistInput" class="field-input field-textarea" rows="3" spellcheck="false"></textarea>
+      <p class="field-hint">15–20 liquid stocks/ETFs recommended.</p>
+
+      <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+
+      <hr class="divider" />
+
+      <button id="resetBtn" class="btn btn-danger">Reset Simulation</button>
+      <p class="field-hint">Wipes cash, positions, journal, and history. Starts a fresh $100,000 1-year run.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
