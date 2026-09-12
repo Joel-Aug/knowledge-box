@@ -35,7 +35,7 @@
    ========================================================================== */
 const CONFIG = {
   // --- your Finnhub key goes here ---
-  FINNHUB_API_KEY: "YOUR_FINNHUB_API_KEY_HERE",
+  FINNHUB_API_KEY: "daipcchr01qqjcj4r02gdaipcchr01qqjcj4r030",
 
   // Default universe: large-cap tech, broad market + sector ETFs, gold, bonds.
   WATCHLIST: [
