@@ -2,8 +2,9 @@
    AI INVESTMENT AGENT
    --------------------------------------------------------------------------
    A virtual, deterministic paper-trading agent. It believes its one job is
-   to maximize the value of a $100,000 starting portfolio over a 1-year
-   horizon, using REAL live prices from Finnhub. No real money ever moves —
+   to grow a small starting stake (CONFIG.STARTING_CASH) toward a target
+   (CONFIG.GOAL_EQUITY) over a 1-year horizon, using REAL live prices from
+   Finnhub. No real money ever moves —
    "positions" are just numbers in localStorage — but the market data driving
    decisions is genuine.
 
@@ -54,7 +55,8 @@ const CONFIG = {
     VNQ: "Real Estate ETF",
   },
 
-  STARTING_CASH: 100000,
+  STARTING_CASH: 200,
+  GOAL_EQUITY: 100000,   // aspirational target the header progress bar tracks toward
   HORIZON_DAYS: 365,
 
   // --- polling cadence ---
@@ -90,7 +92,15 @@ const CONFIG = {
   VOL_PENALTY: 8,             // higher -> volatile names get sized down harder
   MAX_POSITION_PCT: 0.20,     // hard cap: never let one position exceed 20% of equity
   CASH_BUFFER_PCT: 0.10,      // never let a buy push cash below 10% of equity
-  MIN_TRADE_VALUE: 500,       // skip trades too small to bother with
+  MIN_TRADE_PCT: 0.01,        // skip trades smaller than 1% of current equity...
+  MIN_TRADE_FLOOR: 1,         // ...and never bother with a trade under $1 regardless of scale
+
+  // Most brokers (Robinhood, Schwab, Fidelity, etc.) support fractional-share
+  // investing today, so the agent sizes positions in dollars and buys/sells
+  // fractional shares. A single share of a $500 ETF would otherwise blow past
+  // the 20% position cap on a small account. Set to false to floor every
+  // trade down to whole shares if your broker doesn't support fractions.
+  ALLOW_FRACTIONAL_SHARES: true,
 
   // --- avoid thrashing the same name every single minute ---
   TRADE_COOLDOWN_MS: 20 * 60 * 1000, // 20 min between non-forced trades per ticker
@@ -368,6 +378,18 @@ function targetPositionValue(signal, equity) {
   return Math.min(volAdjusted, equity * CONFIG.MAX_POSITION_PCT);
 }
 
+/** The smallest trade worth bothering with, scaled to the account so this works at $200 or $200,000. */
+function minTradeValue(equity) {
+  return Math.max(CONFIG.MIN_TRADE_FLOOR, equity * CONFIG.MIN_TRADE_PCT);
+}
+
+/** Converts a dollar amount to a share count, flooring to whole shares only if fractional trading is disabled. */
+function sharesFromSpend(spend, price) {
+  const raw = spend / price;
+  const shares = CONFIG.ALLOW_FRACTIONAL_SHARES ? raw : Math.floor(raw);
+  return Math.round(shares * 1e6) / 1e6; // guard against float drift without losing fractional precision
+}
+
 function logTrade(action, ticker, shares, price, thesis) {
   state.journal.unshift({
     t: Date.now(),
@@ -392,12 +414,12 @@ function buyThesis(ticker, signal, shares, price, allocPct, opening) {
     signal.sentiment < -0.05 ? "recent headlines carry a slightly negative tone but the price/technical signal still dominates" :
     "headline sentiment is roughly neutral right now";
   return (
-    `${opening ? "Opening" : "Adding to"} ${ticker}: ${shares} sh @ $${price.toFixed(2)} ` +
-    `(${pct(allocPct)} of equity). Momentum over the last ${CONFIG.MOMENTUM_LOOKBACK} updates is ${pct(signal.momentum)} ` +
+    `${opening ? "Opening" : "Adding to"} ${ticker}: invest ~$${(shares * price).toFixed(2)} ` +
+    `(${fmtShares(shares)} sh @ $${price.toFixed(2)}) — ${pct(allocPct)} of equity. Momentum over the last ${CONFIG.MOMENTUM_LOOKBACK} updates is ${pct(signal.momentum)} ` +
     `(${trendWord} trend), price is ${pct(Math.abs(signal.deviation))} ${devWord} its ${CONFIG.SMA_LOOKBACK}-period average, ` +
     `and rolling volatility is ${pct(signal.volatility)} — sized down accordingly to respect the 20% position cap and cash buffer. ` +
     `${sentWord.charAt(0).toUpperCase() + sentWord.slice(1)}. Composite score ${signal.score.toFixed(2)}. ` +
-    `Objective: compound toward the 1-year capital-growth target.`
+    `Objective: compound toward the $${CONFIG.GOAL_EQUITY.toLocaleString("en-US")} goal.`
   );
 }
 
@@ -405,7 +427,7 @@ function sellThesis(ticker, signal, shares, price, pnl) {
   const trendWord = signal.momentum >= 0 ? "still positive" : "turned negative";
   const devWord = signal.deviation >= 0 ? "above" : "below";
   return (
-    `Exiting ${ticker}: sold ${shares} sh @ $${price.toFixed(2)} for a ${pnl >= 0 ? "gain" : "loss"} of $${Math.abs(pnl).toFixed(2)}. ` +
+    `Exiting ${ticker}: sell ${fmtShares(shares)} sh @ $${price.toFixed(2)} (~$${(shares * price).toFixed(2)}) for a ${pnl >= 0 ? "gain" : "loss"} of $${Math.abs(pnl).toFixed(2)}. ` +
     `Momentum is ${trendWord} (${pct(signal.momentum)} over ${CONFIG.MOMENTUM_LOOKBACK} updates), price sits ${pct(Math.abs(signal.deviation))} ${devWord} its average, ` +
     `and the composite score fell to ${signal.score.toFixed(2)} — below the ${CONFIG.SELL_THRESHOLD} exit threshold. ` +
     `Freeing this capital to redeploy toward higher-conviction opportunities.`
@@ -414,7 +436,7 @@ function sellThesis(ticker, signal, shares, price, pnl) {
 
 function trimThesis(ticker, signal, shares, price, reason) {
   return (
-    `Trimming ${ticker}: sold ${shares} sh @ $${price.toFixed(2)}. ${reason} ` +
+    `Trimming ${ticker}: sell ${fmtShares(shares)} sh @ $${price.toFixed(2)} (~$${(shares * price).toFixed(2)}). ${reason} ` +
     `Composite score is ${signal.score.toFixed(2)} — not bearish enough to exit fully, but conviction has cooled ` +
     `and/or the position has grown beyond its risk-adjusted target, so trimming back toward the 20% cap.`
   );
@@ -451,9 +473,9 @@ function runTradingEngine() {
 
     if (overCap && (signal.score < CONFIG.TRIM_SCORE_CEILING) && !onCooldown(ticker)) {
       const target = targetPositionValue(signal, equity);
-      const targetShares = Math.floor(target / price);
+      const targetShares = sharesFromSpend(target, price);
       const trimShares = Math.max(0, pos.shares - targetShares);
-      if (trimShares > 0 && trimShares * price >= CONFIG.MIN_TRADE_VALUE) {
+      if (trimShares > 0 && trimShares * price >= minTradeValue(equity)) {
         state.cash += trimShares * price;
         const thesis = trimThesis(ticker, signal, trimShares, price, "Price appreciation pushed this position above the 20% risk cap.");
         logTrade("trim", ticker, trimShares, price, thesis);
@@ -485,8 +507,8 @@ function runTradingEngine() {
       const addValue = target - currentValue;
       const cashAfterBuffer = state.cash - equityNow * CONFIG.CASH_BUFFER_PCT;
       const spend = Math.min(addValue, Math.max(0, cashAfterBuffer));
-      const shares = Math.floor(spend / price);
-      if (shares <= 0 || shares * price < CONFIG.MIN_TRADE_VALUE) continue;
+      const shares = sharesFromSpend(spend, price);
+      if (shares <= 0 || shares * price < minTradeValue(equityNow)) continue;
 
       const cost = shares * price;
       existing.avgCost = (existing.avgCost * existing.shares + cost) / (existing.shares + shares);
@@ -498,8 +520,8 @@ function runTradingEngine() {
     } else {
       const cashAfterBuffer = state.cash - equityNow * CONFIG.CASH_BUFFER_PCT;
       const spend = Math.min(target, Math.max(0, cashAfterBuffer));
-      const shares = Math.floor(spend / price);
-      if (shares <= 0 || shares * price < CONFIG.MIN_TRADE_VALUE) continue;
+      const shares = sharesFromSpend(spend, price);
+      if (shares <= 0 || shares * price < minTradeValue(equityNow)) continue;
 
       const cost = shares * price;
       state.positions[ticker] = { shares, avgCost: price };
@@ -624,6 +646,13 @@ function signClass(x) {
   return x > 0 ? "positive" : x < 0 ? "negative" : "neutral";
 }
 
+/** Formats a (possibly fractional) share count for display: more decimals for sub-share positions. */
+function fmtShares(x) {
+  if (x >= 100) return x.toFixed(1);
+  if (x >= 1) return x.toFixed(3);
+  return x.toFixed(4);
+}
+
 function renderHeader() {
   const equity = currentEquity();
   document.getElementById("statEquity").textContent = fmtMoney(equity);
@@ -645,13 +674,19 @@ function renderHeader() {
 
   const equityEl = document.getElementById("statEquity");
   equityEl.className = `stat-value ${signClass(equity - CONFIG.STARTING_CASH)}`;
+
+  document.getElementById("goalLabel").textContent = `Goal: ${fmtMoney(CONFIG.GOAL_EQUITY)}`;
+  const goalRange = CONFIG.GOAL_EQUITY - CONFIG.STARTING_CASH;
+  const goalProgress = goalRange > 0 ? clamp((equity - CONFIG.STARTING_CASH) / goalRange, 0, 1) : 0;
+  document.getElementById("goalFill").style.width = `${(goalProgress * 100).toFixed(2)}%`;
+  document.getElementById("goalPct").textContent = `${(goalProgress * 100).toFixed(2)}%`;
 }
 
 function renderHoldings() {
   const tbody = document.getElementById("holdingsBody");
   const tickers = Object.keys(state.positions);
   if (!tickers.length) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="5">No open positions yet — the agent is watching the market.</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="6">No open positions yet — the agent is watching the market.</td></tr>`;
   } else {
     tbody.innerHTML = tickers.map((ticker) => {
       const pos = state.positions[ticker];
@@ -660,7 +695,8 @@ function renderHoldings() {
       const pnlPct = pos.avgCost ? (price - pos.avgCost) / pos.avgCost : 0;
       return `<tr>
         <td class="ticker-cell">${ticker}</td>
-        <td>${pos.shares}</td>
+        <td>${fmtMoney(pos.shares * price)}</td>
+        <td>${fmtShares(pos.shares)}</td>
         <td>${fmtMoney(pos.avgCost)}</td>
         <td>${fmtMoney(price)}</td>
         <td class="${signClass(pnl)}">${fmtMoney(pnl)} (${fmtPct(pnlPct)})</td>
@@ -799,7 +835,7 @@ function saveSettings() {
 }
 
 function resetSimulation() {
-  if (!confirm("Reset the simulation? This wipes cash, positions, and the trade journal, and starts a fresh $100,000 1-year run.")) {
+  if (!confirm(`Reset the simulation? This wipes cash, positions, and the trade journal, and starts a fresh ${fmtMoney(CONFIG.STARTING_CASH)} 1-year run.`)) {
     return;
   }
   state = defaultState();
