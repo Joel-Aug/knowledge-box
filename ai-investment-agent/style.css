@@ -115,6 +115,39 @@ html, body {
 .negative { color: var(--red); }
 .neutral { color: var(--text-dim); }
 
+.goal-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.goal-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.goal-label span:last-child {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.goal-bar {
+  height: 8px;
+  border-radius: 5px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.goal-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--green));
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
 .status-banner {
   background: #2a1f10;
   border: 1px solid #4a3418;

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>AI Investment Agent</title>
-  <meta name="description" content="A virtual AI paper-trading agent that manages a $100,000 portfolio using real live market prices." />
+  <meta name="description" content="A virtual AI paper-trading agent that grows a small starting stake toward a $100,000 goal using real live market prices." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -21,7 +21,7 @@
       <div class="header-stats">
         <div class="stat stat-primary">
           <span class="stat-label">Total Equity</span>
-          <span class="stat-value" id="statEquity">$100,000.00</span>
+          <span class="stat-value" id="statEquity">$200.00</span>
         </div>
         <div class="stat">
           <span class="stat-label">Today</span>
@@ -35,6 +35,14 @@
           <span class="stat-label">Days Left (1yr)</span>
           <span class="stat-value" id="statDays">365</span>
         </div>
+      </div>
+
+      <div class="goal-wrap">
+        <div class="goal-label">
+          <span id="goalLabel">Goal: $100,000</span>
+          <span id="goalPct">0.00%</span>
+        </div>
+        <div class="goal-bar"><div class="goal-fill" id="goalFill"></div></div>
       </div>
 
       <div id="statusBanner" class="status-banner hidden"></div>
@@ -54,6 +62,7 @@
           <thead>
             <tr>
               <th>Ticker</th>
+              <th>Value</th>
               <th>Shares</th>
               <th>Avg Cost</th>
               <th>Price</th>
@@ -61,11 +70,11 @@
             </tr>
           </thead>
           <tbody id="holdingsBody">
-            <tr class="empty-row"><td colspan="5">No open positions yet — the agent is watching the market.</td></tr>
+            <tr class="empty-row"><td colspan="6">No open positions yet — the agent is watching the market.</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="cash-line" id="cashLine">Cash: $100,000.00</div>
+      <div class="cash-line" id="cashLine">Cash: $200.00</div>
     </section>
 
     <!-- ============ WATCHLIST ============ -->
@@ -122,7 +131,7 @@
       <hr class="divider" />
 
       <button id="resetBtn" class="btn btn-danger">Reset Simulation</button>
-      <p class="field-hint">Wipes cash, positions, journal, and history. Starts a fresh $100,000 1-year run.</p>
+      <p class="field-hint">Wipes cash, positions, journal, and history. Starts a fresh run at the configured starting cash.</p>
     </div>
   </div>
 
