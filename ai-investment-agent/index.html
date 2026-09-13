@@ -6,7 +6,7 @@
   <title>AI Investment Agent</title>
   <meta name="description" content="A virtual AI paper-trading agent that grows a small starting stake toward a $100,000 goal using real live market prices." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" />
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
   <div class="app">
@@ -110,34 +110,45 @@
     </footer>
   </div>
 
-  <!-- ============ SETTINGS PANEL (slide-over) ============ -->
+  <!-- ============ SETTINGS PANEL (slide-over, informational) ============ -->
   <div id="settingsOverlay" class="overlay hidden">
     <div class="settings-panel">
       <div class="settings-header">
-        <h2>Settings</h2>
+        <h2>About this agent</h2>
         <button id="closeSettingsBtn" class="icon-btn" aria-label="Close">✕</button>
       </div>
 
-      <label class="field-label" for="apiKeyInput">Finnhub API Key</label>
-      <input type="text" id="apiKeyInput" class="field-input" placeholder="Paste your Finnhub API key" autocomplete="off" spellcheck="false" />
-      <p class="field-hint">Get a free key at finnhub.io. Stored only in this browser's localStorage.</p>
+      <p class="field-hint">
+        This page is a live dashboard, not the agent itself. A GitHub Actions
+        workflow runs the actual trading engine on a schedule (every 15
+        minutes) against real Finnhub data, and commits the result here — so
+        it keeps running whether or not this page is open.
+      </p>
 
-      <label class="field-label" for="watchlistInput">Watchlist (comma-separated tickers)</label>
-      <textarea id="watchlistInput" class="field-input field-textarea" rows="3" spellcheck="false"></textarea>
-      <p class="field-hint">15–20 liquid stocks/ETFs recommended.</p>
-
-      <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+      <label class="field-label">Current watchlist</label>
+      <p class="field-hint" id="settingsWatchlist" style="font-family: monospace;">—</p>
 
       <hr class="divider" />
 
-      <button id="resetBtn" class="btn btn-danger">Reset Simulation</button>
-      <p class="field-hint">Wipes cash, positions, journal, and history. Starts a fresh run at the configured starting cash.</p>
+      <label class="field-label">To change the watchlist or trading parameters</label>
+      <p class="field-hint">Edit <code>ai-investment-agent/agent/config.mjs</code> in the repo and push — the next scheduled run picks it up automatically.</p>
+
+      <label class="field-label">To reset the simulation</label>
+      <p class="field-hint">
+        In the repo, open the <strong>Actions</strong> tab → <strong>AI Investment Agent Runner</strong> →
+        <strong>Run workflow</strong> → set <strong>reset</strong> to true → Run. This wipes cash, positions,
+        journal, and history back to a fresh start. (Only someone with write access to the repo can do this —
+        the page itself has no button for it, on purpose, since it's a public dashboard.)
+      </p>
+
+      <label class="field-label">To run it right now instead of waiting for the schedule</label>
+      <p class="field-hint">Same Actions tab → <strong>Run workflow</strong> → leave reset as false → Run.</p>
     </div>
   </div>
 
   <!-- Bump the ?v= on style.css and app.js each time you push a change — GitHub Pages
        and mobile browsers cache these aggressively, and without a new query string
        your phone can keep running the old file indefinitely even after a deploy. -->
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>

@@ -1,0 +1,55 @@
+name: AI Investment Agent Runner
+
+# Runs the paper-trading agent on a schedule so it keeps evaluating real
+# Finnhub prices whether or not anyone has the dashboard open. See
+# ai-investment-agent/agent/run.mjs for the actual logic.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      reset:
+        description: "Reset the simulation to a fresh starting state instead of running a normal cycle"
+        required: false
+        default: false
+        type: boolean
+
+# Needed so the job can commit the updated state.json back to the repo.
+permissions:
+  contents: write
+
+# Prevent two runs from overlapping and racing on the same commit.
+concurrency:
+  group: ai-investment-agent-runner
+  cancel-in-progress: false
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run agent
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          RESET: ${{ github.event.inputs.reset }}
+        run: node ai-investment-agent/agent/run.mjs
+
+      - name: Commit updated state
+        run: |
+          git config user.name "ai-investment-agent-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ai-investment-agent/data/state.json
+          if git diff --cached --quiet; then
+            echo "No state changes to commit."
+          else
+            git commit -m "Agent run: update portfolio state"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi

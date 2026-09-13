@@ -378,6 +378,15 @@ html, body {
   line-height: 1.4;
 }
 
+.field-hint code {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: var(--text);
+  font-size: 11px;
+}
+
 .btn {
   margin-top: 14px;
   border: none;
