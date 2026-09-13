@@ -1,0 +1,71 @@
+{
+  "cash": 200,
+  "positions": {},
+  "history": [
+    {
+      "t": 1789276876286,
+      "v": 200
+    }
+  ],
+  "journal": [],
+  "priceHistory": {},
+  "lastTradeTime": {},
+  "startDate": 1789276876286,
+  "dayStartDate": "Sun Sep 13 2026",
+  "dayStartEquity": 200,
+  "sentiment": {
+    "global": 0,
+    "updatedAt": 0,
+    "headlineCount": 0,
+    "mentions": {}
+  },
+  "lastPriceUpdate": 0,
+  "lastFetchError": null,
+  "watchlist": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "NVDA",
+    "META",
+    "TSLA",
+    "SPY",
+    "QQQ",
+    "XLK",
+    "XLF",
+    "XLE",
+    "XLV",
+    "XLY",
+    "XLP",
+    "GLD",
+    "TLT",
+    "VNQ"
+  ],
+  "config": {
+    "startingCash": 200,
+    "goalEquity": 100000,
+    "horizonDays": 365,
+    "buyThreshold": 0.3,
+    "sellThreshold": -0.25,
+    "tickerNames": {
+      "AAPL": "Apple",
+      "MSFT": "Microsoft",
+      "GOOGL": "Alphabet",
+      "AMZN": "Amazon",
+      "NVDA": "Nvidia",
+      "META": "Meta",
+      "TSLA": "Tesla",
+      "SPY": "S&P 500 ETF",
+      "QQQ": "Nasdaq 100 ETF",
+      "XLK": "Tech Sector ETF",
+      "XLF": "Financials ETF",
+      "XLE": "Energy ETF",
+      "XLV": "Health Care ETF",
+      "XLY": "Consumer Disc. ETF",
+      "XLP": "Consumer Staples ETF",
+      "GLD": "Gold ETF",
+      "TLT": "20Y Treasury ETF",
+      "VNQ": "Real Estate ETF"
+    }
+  }
+}
