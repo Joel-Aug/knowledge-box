@@ -4,8 +4,13 @@ name: AI Investment Agent Runner
 # Finnhub prices whether or not anyone has the dashboard open. See
 # ai-investment-agent/agent/run.mjs for the actual logic.
 on:
+  # Offset away from :00/:15/:30/:45 on purpose: GitHub's docs note that
+  # scheduled workflows are best-effort and get delayed/dropped most under
+  # load at the top of common intervals, since every repo's simple cron
+  # piles up at the same instants. Firing a few minutes off that boundary
+  # measurably improves the odds this actually runs on time.
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "6,21,36,51 * * * *"
   workflow_dispatch:
     inputs:
       reset:
