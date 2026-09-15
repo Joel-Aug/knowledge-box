@@ -91,6 +91,29 @@ function focusOptionsHtml(pillarId) {
   );
 }
 
+/* ================================== THEME ==================================== */
+
+function applyTheme() {
+  const theme = state.settings.theme || "auto";
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+
+  const icon = theme === "light" ? "☀" : theme === "dark" ? "☾" : "◐";
+  const label = theme === "light" ? "Light" : theme === "dark" ? "Dark" : "Auto";
+  document.getElementById("themeToggleIcon").textContent = icon;
+  const btn = document.getElementById("themeToggle");
+  btn.title = `Theme: ${label} (tap to change)`;
+  btn.setAttribute("aria-label", `Color theme: ${label}. Tap to change.`);
+}
+
+function cycleTheme() {
+  const order = ["auto", "light", "dark"];
+  const current = state.settings.theme || "auto";
+  state.settings.theme = order[(order.indexOf(current) + 1) % order.length];
+  saveState(state);
+  applyTheme();
+}
+
 /* ============================== TASK ACTIONS =============================== */
 
 function createTask({ title, notes, quadrant, term, pillarId, focusArea, dueDate, startTime, endTime }) {
@@ -764,6 +787,7 @@ function onGlobalTaskClick(e) {
 function wireStaticEvents() {
   document.querySelectorAll(".tab-btn").forEach((btn) => btn.addEventListener("click", () => switchView(btn.dataset.view)));
   document.getElementById("readinessBadge").addEventListener("click", () => switchView("roadmap"));
+  document.getElementById("themeToggle").addEventListener("click", cycleTheme);
 
   document.body.addEventListener("click", onGlobalTaskClick);
 
@@ -847,6 +871,7 @@ function wireStaticEvents() {
 
 function init() {
   wireStaticEvents();
+  applyTheme();
   renderReadiness();
   renderToday();
   if ("serviceWorker" in navigator) {

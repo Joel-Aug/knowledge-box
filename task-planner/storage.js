@@ -14,6 +14,7 @@ function defaultState() {
     tasks: [],
     settings: {
       pillarWeights: weights,
+      theme: "auto",
     },
   };
 }

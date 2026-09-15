@@ -5,6 +5,14 @@
    for working text. Mobile-first; a wider column kicks in at the bottom.
    ========================================================================== */
 
+/* Two considered palettes, not just an inverted one: dark is ink + parchment
+   + brass; light is paper + ink-brown + a deeper brass so it still reads as
+   the same identity rather than a generic "light mode" recolor. Dark is the
+   base/default; light applies via prefers-color-scheme or a manual choice
+   (data-theme, set by the header toggle and persisted in app state). The
+   explicit [data-theme] blocks are declared after the media query so a
+   manual choice always wins over the system setting. */
+
 :root {
   --ink: #14161b;
   --ink-raised: #1b1e25;
@@ -39,6 +47,96 @@
   --radius-lg: 4px;
   --gap: 16px;
 }
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink: #f6f1e4;
+    --ink-raised: #fffcf5;
+    --ink-panel: #efe8d5;
+    --ink-panel-alt: #e6ddc5;
+    --line: #cdc2a3;
+    --line-soft: #ddd3ba;
+
+    --parchment: #241f16;
+    --parchment-dim: #5c5340;
+    --parchment-faint: #8a8069;
+
+    --brass: #96731a;
+    --brass-bright: #7a5c12;
+    --brass-dim: rgba(150, 115, 26, 0.14);
+
+    --do: #9c3540;
+    --do-dim: rgba(156, 53, 64, 0.12);
+    --schedule: #96731a;
+    --schedule-dim: rgba(150, 115, 26, 0.14);
+    --delegate: #2b7773;
+    --delegate-dim: rgba(43, 119, 115, 0.14);
+    --drop: #6b6151;
+    --drop-dim: rgba(107, 97, 81, 0.14);
+    --long: #6d4f88;
+    --long-dim: rgba(109, 79, 136, 0.14);
+  }
+}
+
+:root[data-theme="light"] {
+  --ink: #f6f1e4;
+  --ink-raised: #fffcf5;
+  --ink-panel: #efe8d5;
+  --ink-panel-alt: #e6ddc5;
+  --line: #cdc2a3;
+  --line-soft: #ddd3ba;
+
+  --parchment: #241f16;
+  --parchment-dim: #5c5340;
+  --parchment-faint: #8a8069;
+
+  --brass: #96731a;
+  --brass-bright: #7a5c12;
+  --brass-dim: rgba(150, 115, 26, 0.14);
+
+  --do: #9c3540;
+  --do-dim: rgba(156, 53, 64, 0.12);
+  --schedule: #96731a;
+  --schedule-dim: rgba(150, 115, 26, 0.14);
+  --delegate: #2b7773;
+  --delegate-dim: rgba(43, 119, 115, 0.14);
+  --drop: #6b6151;
+  --drop-dim: rgba(107, 97, 81, 0.14);
+  --long: #6d4f88;
+  --long-dim: rgba(109, 79, 136, 0.14);
+}
+
+:root[data-theme="dark"] {
+  --ink: #14161b;
+  --ink-raised: #1b1e25;
+  --ink-panel: #20242c;
+  --ink-panel-alt: #262b34;
+  --line: #333a45;
+  --line-soft: #2a2f38;
+
+  --parchment: #efe7d8;
+  --parchment-dim: #b6ada0;
+  --parchment-faint: #746e63;
+
+  --brass: #c9a227;
+  --brass-bright: #e0bb45;
+  --brass-dim: rgba(201, 162, 39, 0.16);
+
+  --do: #b3454f;
+  --do-dim: rgba(179, 69, 79, 0.18);
+  --schedule: #c9a227;
+  --schedule-dim: rgba(201, 162, 39, 0.16);
+  --delegate: #3c8f8a;
+  --delegate-dim: rgba(60, 143, 138, 0.18);
+  --drop: #7d7466;
+  --drop-dim: rgba(125, 116, 102, 0.18);
+  --long: #8d6aa8;
+  --long-dim: rgba(141, 106, 168, 0.18);
+}
+
+html { color-scheme: light dark; }
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
 * { box-sizing: border-box; }
 
@@ -110,6 +208,31 @@ button, input, textarea, select {
   color: var(--brass-bright);
   font-style: italic;
 }
+
+.header-actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  color: var(--parchment-dim);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover { color: var(--brass); border-color: var(--brass); }
 
 .readiness-badge {
   flex: none;
