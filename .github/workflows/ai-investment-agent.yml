@@ -40,21 +40,43 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Run agent
+      - name: Run agent, commit, and push (retrying against fresh state on a push race)
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           RESET: ${{ github.event.inputs.reset }}
-        run: node ai-investment-agent/agent/run.mjs
-
-      - name: Commit updated state
         run: |
           git config user.name "ai-investment-agent-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add ai-investment-agent/data/state.json
-          if git diff --cached --quiet; then
-            echo "No state changes to commit."
-          else
+
+          # Two runs can land close enough together (a native GitHub Actions
+          # `schedule:` fire, a manual dispatch, and the hourly backstop
+          # trigger all hit the same workflow) that both compute a trade
+          # against the same starting state.json before either has pushed.
+          # Their results are two DIFFERENT valid trajectories from the same
+          # point — there's no sensible way to git-merge that at the content
+          # level, so on a push race we throw away the loser's commit and
+          # simply recompute from whatever is now on origin instead of
+          # attempting a rebase/merge.
+          for attempt in 1 2 3 4 5; do
+            node ai-investment-agent/agent/run.mjs
+
+            git add ai-investment-agent/data/state.json
+            if git diff --cached --quiet; then
+              echo "No state changes to commit."
+              break
+            fi
             git commit -m "Agent run: update portfolio state"
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
-            git push
-          fi
+
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "Pushed successfully on attempt ${attempt}."
+              break
+            fi
+
+            if [ "$attempt" = "5" ]; then
+              echo "::error::Still couldn't push after 5 attempts — giving up."
+              exit 1
+            fi
+            echo "Push rejected (another run landed first) — resetting to the latest state and recomputing."
+            git fetch origin "${GITHUB_REF_NAME}"
+            git reset --hard "origin/${GITHUB_REF_NAME}"
+          done
