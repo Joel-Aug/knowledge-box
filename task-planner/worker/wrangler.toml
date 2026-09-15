@@ -1,27 +1,27 @@
 # Cloudflare Worker config for the Course to COO sync backend.
 #
+# Cloudflare's Git integration names the deployed Worker after the GitHub
+# repo it's connected to (not the "name" below), so this Worker lives at:
+#   https://knowledge-box.<your-cloudflare-subdomain>.workers.dev
+#
 # One-time setup (no command line needed — see the app's Cloud Sync panel
 # for a step-by-step walkthrough):
 #   1. Create a free Cloudflare account.
-#   2. Workers & Pages -> Create -> connect this GitHub repo, set the
-#      root directory to "task-planner/worker".
-#   3. After the first deploy, open the Worker -> Settings -> Variables:
-#      - add a KV namespace binding named STATE_KV (create a new namespace).
+#   2. Storage & Databases -> KV -> Create a namespace (e.g. "coo-tasks").
+#      Copy its ID.
+#   3. Workers & Pages -> Create -> connect this GitHub repo, set the
+#      root directory to "task-planner/worker", leave Build command empty.
+#   4. Deploy. Then open the Worker -> Settings -> Variables:
 #      - add an environment variable SYNC_KEY, value = a password you make
 #        up, and mark it "Encrypt" (this becomes your personal sync key —
-#        never commit it to git, it only lives in Cloudflare's dashboard
+#        never committed to git, it only lives in Cloudflare's dashboard
 #        and in the app itself).
-#   4. Copy the Worker's URL (looks like https://course-to-coo-sync.<you>.workers.dev)
-#      and paste it + your sync key into the app's Cloud Sync panel.
+#   5. Paste the Worker's URL + your sync key into the app's Cloud Sync panel.
 
-name = "course-to-coo-sync"
+name = "knowledge-box"
 main = "index.js"
 compatibility_date = "2024-11-01"
 
-# Created via the dashboard in step 3 above; wrangler.toml just needs the
-# binding name to match what index.js expects (env.STATE_KV). Deploying
-# from the dashboard's Git integration will prompt you to attach the
-# namespace to this binding if it isn't already wired up.
 [[kv_namespaces]]
 binding = "STATE_KV"
 id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
