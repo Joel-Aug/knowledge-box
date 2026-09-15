@@ -235,6 +235,25 @@ html, body {
   font-size: 11px;
 }
 
+.category-tag {
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.cat-fast { background: rgba(62,207,142,0.15); color: var(--green); }
+.cat-stalwart { background: rgba(76,154,255,0.15); color: var(--blue); }
+.cat-slow { background: rgba(139,152,165,0.15); color: var(--text-dim); }
+.cat-cyclical { background: rgba(232,182,76,0.18); color: var(--amber); }
+.cat-turnaround { background: rgba(124,140,255,0.18); color: var(--accent); }
+.cat-etf { background: rgba(139,152,165,0.1); color: var(--text-faint); }
+
+.watchlist-hot { background: rgba(62,207,142,0.06); }
+.watchlist-hot td:first-child { box-shadow: inset 3px 0 0 var(--green); }
+
 .empty-row td {
   text-align: center;
   color: var(--text-faint);
