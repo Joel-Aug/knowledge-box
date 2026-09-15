@@ -90,6 +90,22 @@ function latestPrice(ticker) {
   return hist && hist.length ? hist[hist.length - 1].p : null;
 }
 
+const CATEGORY_CLASS = {
+  "Fast Grower": "cat-fast",
+  "Stalwart": "cat-stalwart",
+  "Slow Grower": "cat-slow",
+  "Cyclical": "cat-cyclical",
+  "Turnaround": "cat-turnaround",
+  "ETF/Index": "cat-etf",
+};
+
+/** Small colored tag shown next to a ticker's name — empty string if there's no category yet. */
+function categoryTag(fundamentals) {
+  if (!fundamentals || !fundamentals.category) return "";
+  const cls = CATEGORY_CLASS[fundamentals.category] || "cat-etf";
+  return `<span class="category-tag ${cls}">${fundamentals.category}</span>`;
+}
+
 /* ================================ CHART ===================================
    Small dependency-free canvas line chart of the equity curve.
    ========================================================================== */
@@ -203,8 +219,10 @@ function renderHoldings() {
       const price = latestPrice(ticker) || pos.avgCost;
       const pnl = (price - pos.avgCost) * pos.shares;
       const pnlPct = pos.avgCost ? (price - pos.avgCost) / pos.avgCost : 0;
+      const signal = state.signals ? state.signals[ticker] : null;
+      const tag = categoryTag(signal && signal.fundamentals);
       return `<tr>
-        <td class="ticker-cell">${ticker}</td>
+        <td class="ticker-cell">${ticker}${tag}</td>
         <td>${fmtMoney(pos.shares * price)}</td>
         <td>${fmtShares(pos.shares)}</td>
         <td>${fmtMoney(pos.avgCost)}</td>
@@ -221,31 +239,61 @@ function renderWatchlist() {
   const names = state.config.tickerNames || {};
   const watchlist = state.watchlist || [];
 
-  tbody.innerHTML = watchlist.map((ticker) => {
+  // Sort by Lynch Score where we have one (real stocks), falling back to the
+  // legacy momentum/reversion score for ETFs/indices — highest conviction first,
+  // so the most attractive names are visible at a glance without scrolling.
+  const sorted = [...watchlist].sort((a, b) => {
+    const sa = state.signals ? state.signals[a] : null;
+    const sb = state.signals ? state.signals[b] : null;
+    const rankA = sa ? (sa.lynch ? sa.lynch.lynchScore : sa.score * 100) : -Infinity;
+    const rankB = sb ? (sb.lynch ? sb.lynch.lynchScore : sb.score * 100) : -Infinity;
+    return rankB - rankA;
+  });
+
+  tbody.innerHTML = sorted.map((ticker) => {
     const signal = state.signals ? state.signals[ticker] : null;
     const price = latestPrice(ticker);
     const name = names[ticker] || "";
+    const tag = categoryTag(signal && signal.fundamentals);
 
     if (!signal) {
       const priceCell = price ? fmtMoney(price) : "—";
       return `<tr>
-        <td class="ticker-cell">${ticker}<span class="ticker-name">${name}</span></td>
+        <td class="ticker-cell">${ticker}<span class="ticker-name">${name}</span>${tag}</td>
         <td>${priceCell}</td>
-        <td colspan="3" class="neutral">warming up…</td>
+        <td colspan="4" class="neutral">warming up…</td>
         <td><span class="signal-badge signal-hold">HOLD</span></td>
       </tr>`;
     }
 
-    let badgeClass = "signal-hold", badgeText = "HOLD";
-    if (signal.score >= state.config.buyThreshold) { badgeClass = "signal-buy"; badgeText = "BUY"; }
-    else if (signal.score <= state.config.sellThreshold) { badgeClass = "signal-sell"; badgeText = "SELL"; }
+    const f = signal.fundamentals;
+    const hasLynch = f && f.category && f.category !== "ETF/Index" && f.lynchScore !== undefined;
 
-    return `<tr>
-      <td class="ticker-cell">${ticker}<span class="ticker-name">${name}</span></td>
+    let badgeClass = "signal-hold", badgeText = "HOLD";
+    if (hasLynch) {
+      if (signal.lynch && signal.lynch.lynchScore >= state.config.lynchBuyScore && !signal.lynch.weakBalanceSheet && !signal.lynch.sharpDowntrend) {
+        badgeClass = "signal-buy"; badgeText = "BUY";
+      } else if (f.peg !== null && f.peg !== undefined && f.peg > state.config.pegSell) {
+        badgeClass = "signal-sell"; badgeText = "SELL";
+      }
+    } else {
+      if (signal.score >= state.config.buyThreshold) { badgeClass = "signal-buy"; badgeText = "BUY"; }
+      else if (signal.score <= state.config.sellThreshold) { badgeClass = "signal-sell"; badgeText = "SELL"; }
+    }
+
+    const pegCell = hasLynch ? (f.peg === null ? "n/a" : f.peg.toFixed(2)) : "—";
+    const growthCell = hasLynch && f.growthPct !== null ? fmtPct(f.growthPct / 100) : "—";
+    const debtCell = hasLynch && f.debtEquity !== null && f.debtEquity !== undefined ? f.debtEquity.toFixed(2) : "—";
+    const lynchCell = hasLynch ? Math.round(f.lynchScore) : "—";
+    const rowClass = hasLynch && f.lynchScore >= state.config.lynchBuyScore ? "watchlist-hot" : "";
+
+    return `<tr class="${rowClass}">
+      <td class="ticker-cell">${ticker}<span class="ticker-name">${name}</span>${tag}</td>
       <td>${fmtMoney(signal.current)}</td>
-      <td class="${signClass(signal.momentum)}">${fmtPct(signal.momentum)}</td>
-      <td class="${signClass(-signal.deviation)}">${fmtPct(signal.deviation)}</td>
-      <td>${(signal.volatility * 100).toFixed(1)}%</td>
+      <td>${pegCell}</td>
+      <td>${growthCell}</td>
+      <td>${debtCell}</td>
+      <td>${lynchCell}</td>
       <td><span class="signal-badge ${badgeClass}">${badgeText}</span></td>
     </tr>`;
   }).join("");

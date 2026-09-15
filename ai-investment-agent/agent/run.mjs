@@ -26,6 +26,7 @@ import {
   updateTickerMentions,
   runTradingEngine,
   recalcPortfolio,
+  buildFundamentalsRecord,
 } from "./engine.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -48,6 +49,59 @@ async function fetchQuote(ticker) {
     throw new Error(`No quote data for ${ticker} (unknown symbol or rate-limited)`);
   }
   return data;
+}
+
+// Finnhub's /stock/metric response uses a few different field names across
+// plan tiers/history for the same underlying number — try each in order and
+// use the first one that's actually present as a finite number.
+const EPS_GROWTH_TTM_KEYS = ["epsGrowthTTMYoy", "epsGrowthQuarterlyYoy", "epsGrowth3Y", "epsGrowth5Y"];
+const EPS_GROWTH_RECENT_KEYS = ["epsGrowthQuarterlyYoy", "epsGrowthTTMYoy"];
+const PE_KEYS = ["peExclExtraTTM", "peBasicExclExtraTTM", "peNormalizedAnnual", "peInclExtraTTM", "peTTM"];
+const DEBT_EQUITY_KEYS = ["totalDebt/totalEquityQuarterly", "totalDebt/totalEquityAnnual", "longTermDebt/equityQuarterly"];
+const FCF_KEYS = ["pfcfShareTTM"]; // price/FCF-per-share proxy — Finnhub's free tier has no raw FCF dollar figure
+
+function pickFirstNumber(obj, keys) {
+  for (const k of keys) {
+    const v = obj[k];
+    if (typeof v === "number" && isFinite(v)) return v;
+  }
+  return null;
+}
+
+/**
+ * Fetches the slow-moving fundamentals Finnhub has for one ticker: EPS
+ * growth, P/E, debt/equity (via /stock/metric) and its industry (via
+ * /stock/profile2, used to flag classically cyclical sectors). ETFs/indices
+ * return no usable EPS growth here — that's expected, and engine.mjs's
+ * buildFundamentalsRecord treats it as "ETF/Index" and falls back to the
+ * existing momentum/mean-reversion scoring for that ticker.
+ */
+async function fetchFundamentals(ticker) {
+  const metricUrl = `${FINNHUB_BASE}/stock/metric?symbol=${encodeURIComponent(ticker)}&metric=all&token=${FINNHUB_API_KEY}`;
+  const metricRes = await fetch(metricUrl);
+  if (!metricRes.ok) throw new Error(`Fundamentals fetch failed for ${ticker}: HTTP ${metricRes.status}`);
+  const metricData = await metricRes.json();
+  const metric = (metricData && metricData.metric) || {};
+
+  await delay(QUOTE_STAGGER_MS);
+  const profileUrl = `${FINNHUB_BASE}/stock/profile2?symbol=${encodeURIComponent(ticker)}&token=${FINNHUB_API_KEY}`;
+  const profileRes = await fetch(profileUrl);
+  const profile = profileRes.ok ? await profileRes.json() : {};
+
+  const epsGrowthRaw = pickFirstNumber(metric, EPS_GROWTH_TTM_KEYS);
+  const epsGrowthRecentRaw = pickFirstNumber(metric, EPS_GROWTH_RECENT_KEYS);
+
+  return {
+    // Finnhub reports growth metrics as whole-number percentages (24.5 == 24.5%)
+    // — normalize to a decimal fraction so the rest of the engine works in one unit.
+    epsGrowth: epsGrowthRaw === null ? null : epsGrowthRaw / 100,
+    epsGrowthRecent: epsGrowthRecentRaw === null ? null : epsGrowthRecentRaw / 100,
+    pe: pickFirstNumber(metric, PE_KEYS),
+    debtEquity: pickFirstNumber(metric, DEBT_EQUITY_KEYS),
+    fcfProxy: pickFirstNumber(metric, FCF_KEYS),
+    marketCap: typeof metric.marketCapitalization === "number" ? metric.marketCapitalization : null,
+    industry: profile && profile.finnhubIndustry ? profile.finnhubIndustry : null,
+  };
 }
 
 async function fetchNews() {
@@ -119,6 +173,25 @@ async function main() {
     console.warn("News refresh failed:", err.message);
   }
 
+  // Fundamentals (EPS growth, P/E, debt/equity) move on a quarterly cadence,
+  // so most runs skip this entirely — only a ticker whose cache has aged
+  // past FUNDAMENTALS_REFRESH_MS actually costs an API call here.
+  let fundamentalsRefreshed = 0;
+  for (const ticker of CONFIG.WATCHLIST) {
+    const cached = state.fundamentals[ticker];
+    const stale = !cached || now - cached.updatedAt >= CONFIG.FUNDAMENTALS_REFRESH_MS;
+    if (!stale) continue;
+    if (fundamentalsRefreshed > 0) await delay(QUOTE_STAGGER_MS);
+    try {
+      const raw = await fetchFundamentals(ticker);
+      state.fundamentals[ticker] = buildFundamentalsRecord(CONFIG, state.priceHistory[ticker], cached, raw, now);
+      fundamentalsRefreshed++;
+    } catch (err) {
+      sawError = sawError || err.message;
+      console.warn(err.message);
+    }
+  }
+
   state.lastFetchError = sawError;
 
   const journalCountBefore = state.journal.length;
@@ -129,7 +202,8 @@ async function main() {
   console.log(
     `Run complete. Equity: $${state.cash.toFixed(2)} cash + positions. ` +
     `Trades this run: ${tradesThisRun}. Tickers with history: ` +
-    `${Object.values(state.priceHistory).filter((h) => h.length >= CONFIG.SMA_LOOKBACK).length}/${CONFIG.WATCHLIST.length} warmed up.`
+    `${Object.values(state.priceHistory).filter((h) => h.length >= CONFIG.SMA_LOOKBACK).length}/${CONFIG.WATCHLIST.length} warmed up. ` +
+    `Fundamentals refreshed: ${fundamentalsRefreshed}.`
   );
 
   await saveState(state);
