@@ -438,6 +438,183 @@ button, input, textarea, select {
 
 .task-edit-btn:hover { color: var(--brass); }
 
+/* ================================ SCHEDULE VIEW ================================ */
+
+.sched-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.sched-nav-btn {
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  color: var(--parchment-dim);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sched-nav-btn:hover { color: var(--brass); border-color: var(--brass); }
+
+.sched-month-btn {
+  background: none;
+  border: none;
+  color: var(--parchment);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  cursor: pointer;
+  min-width: 180px;
+  text-align: center;
+}
+
+.sched-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.sched-day {
+  background: var(--ink-raised);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: 8px 2px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.sched-day:hover { border-color: var(--line); }
+
+.sched-day.today { border-color: var(--parchment-faint); }
+
+.sched-day.selected {
+  background: var(--brass-dim);
+  border-color: var(--brass);
+}
+
+.sched-day-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--parchment-faint);
+}
+
+.sched-day-num {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--parchment);
+}
+
+.sched-day.selected .sched-day-num { color: var(--brass-bright); }
+
+.sched-day-dots {
+  display: flex;
+  gap: 3px;
+  height: 6px;
+  align-items: center;
+}
+
+.sched-day-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.sched-day-more {
+  font-size: 0.58rem;
+  color: var(--parchment-faint);
+}
+
+.sched-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sched-group-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--parchment-faint);
+  margin: 6px 0 -2px;
+}
+
+.sched-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--ink-raised);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+}
+
+.sched-icon {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.sched-body { flex: 1; min-width: 0; cursor: pointer; }
+
+.sched-time {
+  font-size: 0.72rem;
+  color: var(--parchment-faint);
+  margin-bottom: 2px;
+}
+
+.sched-title {
+  font-size: 0.92rem;
+  color: var(--parchment);
+}
+
+.sched-title.done {
+  color: var(--parchment-faint);
+  text-decoration: line-through;
+}
+
+.sched-empty {
+  color: var(--parchment-faint);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.fab {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  z-index: 40;
+}
+
+.fab:hover { filter: brightness(1.08); }
+
 /* ============================ LISTS / HISTORY =============================== */
 
 .lists-toolbar {
@@ -512,6 +689,28 @@ button, input, textarea, select {
   color: var(--brass);
   flex: none;
   margin-top: 1px;
+}
+
+.backup-row {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.backup-hint {
+  font-size: 0.76rem;
+  color: var(--parchment-faint);
+  margin: 0;
+}
+
+.backup-buttons {
+  display: flex;
+  gap: 8px;
 }
 
 /* ============================== ROADMAP VIEW ================================ */
@@ -842,6 +1041,37 @@ button, input, textarea, select {
 .pill-option.active[data-quadrant="inu"] { border-color: var(--schedule); color: var(--schedule); background: var(--schedule-dim); }
 .pill-option.active[data-quadrant="uni"] { border-color: var(--delegate); color: var(--delegate); background: var(--delegate-dim); }
 .pill-option.active[data-quadrant="neither"] { border-color: var(--drop); color: var(--drop); background: var(--drop-dim); }
+
+.schedule-fields {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.schedule-fields input[type="date"],
+.schedule-fields input[type="time"] {
+  flex: 1 1 110px;
+}
+
+.schedule-fields-sep {
+  color: var(--parchment-faint);
+}
+
+.btn-clear-date {
+  flex: none;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--parchment-faint);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.btn-clear-date:hover { color: var(--do); border-color: var(--do); }
 
 .modal-actions {
   display: flex;

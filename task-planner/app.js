@@ -40,6 +40,45 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
 }
 
+function isoDate(d) {
+  const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, "0"), day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function todayISODate() {
+  return isoDate(new Date());
+}
+
+function formatTime12(hhmm) {
+  const [h, m] = hhmm.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  const h12 = ((h + 11) % 12) + 1;
+  return `${h12}:${String(m).padStart(2, "0")} ${period}`;
+}
+
+function timeToMinutes(hhmm) {
+  const [h, m] = hhmm.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function formatTimeRange(startTime, endTime) {
+  if (!startTime) return "Anytime";
+  let str = formatTime12(startTime);
+  if (endTime) {
+    const mins = timeToMinutes(endTime) - timeToMinutes(startTime);
+    const dur = mins > 0 ? (mins >= 60 ? `${(mins / 60).toFixed(mins % 60 ? 1 : 0)}h` : `${mins} min`) : "";
+    str += ` – ${formatTime12(endTime)}${dur ? ` (${dur})` : ""}`;
+  }
+  return str;
+}
+
+function formatDueBadge(t) {
+  if (!t.dueDate) return "";
+  const d = new Date(`${t.dueDate}T00:00:00`);
+  const dateStr = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  return t.startTime ? `${dateStr}, ${formatTime12(t.startTime)}` : dateStr;
+}
+
 function pillarOptionsHtml() {
   return PILLARS.map((p) => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join("");
 }
@@ -54,7 +93,7 @@ function focusOptionsHtml(pillarId) {
 
 /* ============================== TASK ACTIONS =============================== */
 
-function createTask({ title, notes, quadrant, term, pillarId, focusArea }) {
+function createTask({ title, notes, quadrant, term, pillarId, focusArea, dueDate, startTime, endTime }) {
   const task = {
     id: uid(),
     title,
@@ -63,6 +102,9 @@ function createTask({ title, notes, quadrant, term, pillarId, focusArea }) {
     term,
     pillarId: term === "long" ? pillarId || null : null,
     focusArea: term === "long" ? focusArea || null : null,
+    dueDate: dueDate || null,
+    startTime: dueDate && startTime ? startTime : null,
+    endTime: dueDate && startTime && endTime ? endTime : null,
     status: "open",
     createdAt: new Date().toISOString(),
     completedAt: null,
@@ -79,6 +121,12 @@ function updateTask(id, patch) {
   if (t.term !== "long") {
     t.pillarId = null;
     t.focusArea = null;
+  }
+  if (!t.dueDate) {
+    t.startTime = null;
+    t.endTime = null;
+  } else if (!t.startTime) {
+    t.endTime = null;
   }
   persistAndRerender();
 }
@@ -112,9 +160,54 @@ function persistAndRerender() {
   saveState(state);
   renderReadiness();
   if (currentView === "today") renderToday();
+  else if (currentView === "schedule") renderSchedule();
   else if (currentView === "lists") renderLists();
   else if (currentView === "history") renderHistory();
   else if (currentView === "roadmap") renderRoadmap();
+}
+
+/* ================================== BACKUP ==================================== */
+
+function exportBackup() {
+  const data = JSON.stringify(state, null, 2);
+  const filename = `course-to-coo-backup-${todayISODate()}.json`;
+  if (navigator.canShare && (() => { try { return navigator.canShare({ files: [new File([data], filename, { type: "application/json" })] }); } catch { return false; } })()) {
+    navigator.share({ files: [new File([data], filename, { type: "application/json" })], title: filename }).catch(() => {});
+    return;
+  }
+  const url = URL.createObjectURL(new Blob([data], { type: "application/json" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function importBackupFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    let parsed;
+    try {
+      parsed = JSON.parse(reader.result);
+    } catch {
+      alert("That file didn't look like a valid backup.");
+      return;
+    }
+    if (!parsed || !Array.isArray(parsed.tasks)) {
+      alert("That file didn't look like a valid backup.");
+      return;
+    }
+    if (!confirm(`Replace everything currently in the app with this backup (${parsed.tasks.length} tasks)? This can't be undone.`)) return;
+    state.tasks = parsed.tasks;
+    state.settings = { ...defaultState().settings, ...(parsed.settings || {}) };
+    saveState(state);
+    renderReadiness();
+    switchView(currentView);
+    alert("Backup restored.");
+  };
+  reader.readAsText(file);
 }
 
 /* =============================== PILLAR MATH ================================ */
@@ -169,6 +262,7 @@ function taskCardHtml(t, opts = {}) {
           ${opts.showQuadrant ? `<span class="badge badge-quadrant-${t.quadrant}">${QUADRANT_BY_ID[t.quadrant].verb}</span>` : ""}
           ${pillar ? `<span class="badge">${escapeHtml(pillar.short)}</span>` : ""}
           ${t.focusArea ? `<span class="badge">${escapeHtml(t.focusArea)}</span>` : ""}
+          ${t.dueDate && !isDone ? `<span class="badge badge-date">${escapeHtml(formatDueBadge(t))}</span>` : ""}
           ${isDone ? `<span class="badge badge-date">done ${formatDate(t.completedAt)}</span>` : ""}
         </div>
       </div>
@@ -238,6 +332,98 @@ function onQuadrantGridSubmit(e) {
   const pillarId = term === "long" ? form.querySelector(".quick-add-pillar").value : null;
   const focusArea = term === "long" ? form.querySelector(".quick-add-focus").value || null : null;
   createTask({ title, notes: "", quadrant, term, pillarId, focusArea });
+}
+
+/* ================================ SCHEDULE VIEW ================================ */
+
+let scheduleDate = todayISODate();
+
+function startOfWeek(iso) {
+  const d = new Date(`${iso}T00:00:00`);
+  const day = d.getDay(); // 0 = Sun .. 6 = Sat
+  const diff = (day === 0 ? -6 : 1) - day; // shift back to Monday
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+
+function schedDayCellHtml(d) {
+  const iso = isoDate(d);
+  const dayTasks = state.tasks.filter((t) => t.dueDate === iso);
+  const dots = dayTasks.slice(0, 4);
+  return `
+    <div class="sched-day ${iso === todayISODate() ? "today" : ""} ${iso === scheduleDate ? "selected" : ""}" data-date="${iso}">
+      <span class="sched-day-label">${d.toLocaleDateString(undefined, { weekday: "short" })}</span>
+      <span class="sched-day-num">${d.getDate()}</span>
+      <span class="sched-day-dots">
+        ${dots.map((t) => `<span class="sched-day-dot" style="background:var(--${QUADRANT_BY_ID[t.quadrant].accent})"></span>`).join("")}
+      </span>
+      ${dayTasks.length > 4 ? `<span class="sched-day-more">+${dayTasks.length - 4}</span>` : ""}
+    </div>`;
+}
+
+function schedRowHtml(t) {
+  const isDone = t.status === "completed";
+  const pillar = t.pillarId ? PILLAR_BY_ID[t.pillarId] : null;
+  return `
+    <div class="sched-row" data-task-id="${t.id}">
+      <div class="sched-icon" style="background:var(--${QUADRANT_BY_ID[t.quadrant].accent})">${t.term === "long" ? "&#9670;" : "&#9679;"}</div>
+      <div class="sched-body" data-action="edit">
+        <div class="sched-time">${escapeHtml(formatTimeRange(t.startTime, t.endTime))}</div>
+        <div class="sched-title ${isDone ? "done" : ""}">${escapeHtml(t.title)}</div>
+        <div class="task-badges">
+          <span class="badge badge-term-${t.term}">${t.term === "long" ? "Long" : "Short"}</span>
+          <span class="badge badge-quadrant-${t.quadrant}">${QUADRANT_BY_ID[t.quadrant].verb}</span>
+          ${pillar ? `<span class="badge">${escapeHtml(pillar.short)}</span>` : ""}
+        </div>
+      </div>
+      <button type="button" class="task-check ${isDone ? "checked" : ""}" data-action="toggle"
+        aria-label="${isDone ? "Mark open" : "Mark complete"}"></button>
+    </div>`;
+}
+
+function renderSchedule() {
+  const monday = startOfWeek(scheduleDate);
+  const days = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return d;
+  });
+
+  const selected = new Date(`${scheduleDate}T00:00:00`);
+  document.getElementById("schedMonthLabel").textContent = selected.toLocaleDateString(undefined, {
+    month: "long", year: "numeric",
+  });
+  document.getElementById("schedStrip").innerHTML = days.map(schedDayCellHtml).join("");
+
+  const dayTasks = state.tasks.filter((t) => t.dueDate === scheduleDate);
+  const timed = dayTasks.filter((t) => t.startTime).sort((a, b) => timeToMinutes(a.startTime) - timeToMinutes(b.startTime));
+  const anytime = dayTasks.filter((t) => !t.startTime);
+
+  const timeline = document.getElementById("schedTimeline");
+  if (!dayTasks.length) {
+    timeline.innerHTML = `<div class="sched-empty">Nothing scheduled for this day. Tap + to add something.</div>`;
+    return;
+  }
+  let html = "";
+  if (timed.length) html += timed.map(schedRowHtml).join("");
+  if (anytime.length) {
+    html += `<p class="sched-group-title">Anytime</p>` + anytime.map(schedRowHtml).join("");
+  }
+  timeline.innerHTML = html;
+}
+
+function onSchedStripClick(e) {
+  const cell = e.target.closest(".sched-day");
+  if (!cell) return;
+  scheduleDate = cell.dataset.date;
+  renderSchedule();
+}
+
+function shiftScheduleWeek(days) {
+  const d = new Date(`${scheduleDate}T00:00:00`);
+  d.setDate(d.getDate() + days);
+  scheduleDate = isoDate(d);
+  renderSchedule();
 }
 
 /* ================================ LISTS VIEW ================================= */
@@ -457,6 +643,10 @@ const fieldPillarWrap = document.getElementById("fieldPillarWrap");
 const fieldPillar = document.getElementById("fieldPillar");
 const fieldFocusWrap = document.getElementById("fieldFocusWrap");
 const fieldFocus = document.getElementById("fieldFocus");
+const fieldDate = document.getElementById("fieldDate");
+const fieldStart = document.getElementById("fieldStart");
+const fieldEnd = document.getElementById("fieldEnd");
+const fieldDateClear = document.getElementById("fieldDateClear");
 const taskDeleteBtn = document.getElementById("taskDeleteBtn");
 
 fieldQuadrant.innerHTML = QUADRANTS.map(
@@ -469,24 +659,31 @@ function toggleLongFields(show) {
   fieldFocusWrap.classList.toggle("hidden", !show);
 }
 
-function openEditor(id) {
-  const t = state.tasks.find((x) => x.id === id);
-  if (!t) return;
-  editingId = id;
-  fieldTitle.value = t.title;
-  fieldNotes.value = t.notes || "";
+function openEditor(id, defaults = {}) {
+  const t = id ? state.tasks.find((x) => x.id === id) : null;
+  if (id && !t) return;
+  editingId = id || null;
+
+  const quadrant = t ? t.quadrant : defaults.quadrant || "ui";
+  const term = t ? t.term : defaults.term || "short";
+
+  fieldTitle.value = t ? t.title : "";
+  fieldNotes.value = t ? t.notes || "" : "";
   fieldQuadrant.querySelectorAll(".pill-option").forEach((btn) =>
-    btn.classList.toggle("active", btn.dataset.quadrant === t.quadrant)
+    btn.classList.toggle("active", btn.dataset.quadrant === quadrant)
   );
   fieldTermWrap.querySelectorAll(".segmented-btn").forEach((btn) =>
-    btn.classList.toggle("active", btn.dataset.term === t.term)
+    btn.classList.toggle("active", btn.dataset.term === term)
   );
-  toggleLongFields(t.term === "long");
-  fieldPillar.value = t.pillarId || PILLARS[0].id;
+  toggleLongFields(term === "long");
+  fieldPillar.value = (t && t.pillarId) || PILLARS[0].id;
   fieldFocus.innerHTML = focusOptionsHtml(fieldPillar.value);
-  fieldFocus.value = t.focusArea || "";
-  taskDeleteBtn.classList.remove("hidden");
-  document.getElementById("taskModalTitle").textContent = "Edit task";
+  fieldFocus.value = (t && t.focusArea) || "";
+  fieldDate.value = t ? t.dueDate || "" : defaults.dueDate || "";
+  fieldStart.value = t ? t.startTime || "" : "";
+  fieldEnd.value = t ? t.endTime || "" : "";
+  taskDeleteBtn.classList.toggle("hidden", !t);
+  document.getElementById("taskModalTitle").textContent = t ? "Edit task" : "New task";
   modalOverlay.classList.remove("hidden");
   fieldTitle.focus();
 }
@@ -499,12 +696,17 @@ function closeModal() {
 function onTaskFormSubmit(e) {
   e.preventDefault();
   const title = fieldTitle.value.trim();
-  if (!title || !editingId) return;
+  if (!title) return;
   const quadrant = fieldQuadrant.querySelector(".pill-option.active")?.dataset.quadrant || "ui";
   const term = fieldTermWrap.querySelector(".segmented-btn.active")?.dataset.term || "short";
   const pillarId = term === "long" ? fieldPillar.value : null;
   const focusArea = term === "long" ? fieldFocus.value || null : null;
-  updateTask(editingId, { title, notes: fieldNotes.value.trim(), quadrant, term, pillarId, focusArea });
+  const dueDate = fieldDate.value || null;
+  const startTime = dueDate ? fieldStart.value || null : null;
+  const endTime = dueDate && startTime ? fieldEnd.value || null : null;
+  const payload = { title, notes: fieldNotes.value.trim(), quadrant, term, pillarId, focusArea, dueDate, startTime, endTime };
+  if (editingId) updateTask(editingId, payload);
+  else createTask(payload);
   closeModal();
 }
 
@@ -541,6 +743,7 @@ function switchView(view) {
   document.querySelectorAll(".tab-btn").forEach((btn) => btn.classList.toggle("active", btn.dataset.view === view));
 
   if (view === "today") renderToday();
+  else if (view === "schedule") renderSchedule();
   else if (view === "roadmap") renderRoadmap();
   else if (view === "lists") renderLists();
   else if (view === "history") renderHistory();
@@ -568,6 +771,28 @@ function wireStaticEvents() {
   grid.addEventListener("click", onQuadrantGridClick);
   grid.addEventListener("change", onQuadrantGridChange);
   grid.addEventListener("submit", onQuadrantGridSubmit);
+
+  document.getElementById("schedStrip").addEventListener("click", onSchedStripClick);
+  document.getElementById("schedPrevWeek").addEventListener("click", () => shiftScheduleWeek(-7));
+  document.getElementById("schedNextWeek").addEventListener("click", () => shiftScheduleWeek(7));
+  document.getElementById("schedMonthLabel").addEventListener("click", () => {
+    scheduleDate = todayISODate();
+    renderSchedule();
+  });
+
+  document.getElementById("fabAdd").addEventListener("click", () => {
+    openEditor(null, { dueDate: currentView === "schedule" ? scheduleDate : "" });
+  });
+
+  document.getElementById("exportBackupBtn").addEventListener("click", exportBackup);
+  document.getElementById("importBackupBtn").addEventListener("click", () => {
+    document.getElementById("importBackupInput").click();
+  });
+  document.getElementById("importBackupInput").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) importBackupFile(file);
+    e.target.value = "";
+  });
 
   document.getElementById("listsTermToggle").addEventListener("click", (e) => {
     const btn = e.target.closest(".segmented-btn");
@@ -603,6 +828,11 @@ function wireStaticEvents() {
   fieldPillar.addEventListener("change", () => {
     fieldFocus.innerHTML = focusOptionsHtml(fieldPillar.value);
   });
+  fieldDateClear.addEventListener("click", () => {
+    fieldDate.value = "";
+    fieldStart.value = "";
+    fieldEnd.value = "";
+  });
   taskDeleteBtn.addEventListener("click", () => editingId && deleteTask(editingId));
   taskForm.addEventListener("submit", onTaskFormSubmit);
   document.getElementById("taskModalClose").addEventListener("click", closeModal);
@@ -619,6 +849,9 @@ function init() {
   wireStaticEvents();
   renderReadiness();
   renderToday();
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
 }
 
 document.addEventListener("DOMContentLoaded", init);

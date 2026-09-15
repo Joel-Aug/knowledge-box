@@ -6,6 +6,12 @@
   <title>Course to COO</title>
   <meta name="description" content="A personal daily task planner: triage tasks on an Eisenhower matrix while long-run tasks build a roadmap toward becoming COO of C-Pharma." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 font-size=%2290%22>&#9874;</text></svg>" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <meta name="theme-color" content="#14161b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Course to COO" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -29,6 +35,7 @@
 
       <nav class="tabs" aria-label="Views">
         <button class="tab-btn active" data-view="today">Today</button>
+        <button class="tab-btn" data-view="schedule">Schedule</button>
         <button class="tab-btn" data-view="roadmap">Roadmap</button>
         <button class="tab-btn" data-view="lists">Lists</button>
         <button class="tab-btn" data-view="history">History</button>
@@ -40,6 +47,17 @@
       <!-- ============ TODAY / TRIAGE VIEW ============ -->
       <section id="view-today" class="view">
         <div class="quadrant-grid" id="quadrantGrid"><!-- 4 quadrant columns rendered by app.js --></div>
+      </section>
+
+      <!-- ============ SCHEDULE VIEW ============ -->
+      <section id="view-schedule" class="view hidden">
+        <div class="sched-header">
+          <button class="sched-nav-btn" id="schedPrevWeek" aria-label="Previous week">&#8249;</button>
+          <button class="sched-month-btn" id="schedMonthLabel"></button>
+          <button class="sched-nav-btn" id="schedNextWeek" aria-label="Next week">&#8250;</button>
+        </div>
+        <div class="sched-strip" id="schedStrip"><!-- 7 day cells rendered by app.js --></div>
+        <div class="sched-timeline" id="schedTimeline"><!-- selected day's tasks rendered by app.js --></div>
       </section>
 
       <!-- ============ ROADMAP VIEW ============ -->
@@ -77,10 +95,21 @@
           </div>
         </div>
         <div id="historyContent"></div>
+
+        <div class="backup-row">
+          <p class="backup-hint">Your data lives only in this browser. Keep a copy just in case.</p>
+          <div class="backup-buttons">
+            <button type="button" class="btn btn-ghost" id="exportBackupBtn">Export backup</button>
+            <button type="button" class="btn btn-ghost" id="importBackupBtn">Import backup</button>
+            <input type="file" id="importBackupInput" accept="application/json" class="hidden" />
+          </div>
+        </div>
       </section>
 
     </main>
   </div>
+
+  <button class="fab" id="fabAdd" aria-label="Add task" title="Add task">+</button>
 
   <!-- ============ TASK EDITOR MODAL ============ -->
   <div class="modal-overlay hidden" id="taskModalOverlay">
@@ -123,6 +152,17 @@
           <select id="fieldFocus">
             <option value="">&mdash; none &mdash;</option>
           </select>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Schedule <em>(optional)</em></span>
+          <div class="schedule-fields">
+            <input type="date" id="fieldDate" />
+            <input type="time" id="fieldStart" />
+            <span class="schedule-fields-sep">&ndash;</span>
+            <input type="time" id="fieldEnd" />
+            <button type="button" class="btn-clear-date" id="fieldDateClear" title="Clear schedule">&times;</button>
+          </div>
         </div>
 
         <div class="modal-actions">
