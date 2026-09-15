@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      try {
+        var raw = localStorage.getItem("coo-task-planner-v1");
+        var parsed = raw && JSON.parse(raw);
+        var theme = parsed && parsed.settings && parsed.settings.theme;
+        if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course to COO</title>
+  <meta name="description" content="A personal daily task planner: triage tasks on an Eisenhower matrix while long-run tasks build a roadmap toward becoming COO of C-Pharma." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 font-size=%2290%22>&#9874;</text></svg>" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f6f1e4" media="(prefers-color-scheme: light)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Course to COO" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="header-row">
+        <div class="brand">
+          <h1>Course to COO</h1>
+          <p class="tagline">Triage today. Build the roadmap. <span class="objective-inline">Become COO of C-Pharma.</span></p>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" title="Theme: Auto" aria-label="Toggle color theme">
+            <span id="themeToggleIcon">&#9789;</span>
+          </button>
+          <button class="readiness-badge" id="readinessBadge" title="Jump to roadmap" aria-label="Overall COO readiness — open roadmap">
+            <svg viewBox="0 0 64 64" class="readiness-ring" aria-hidden="true">
+              <circle cx="32" cy="32" r="27" class="ring-track" />
+              <circle cx="32" cy="32" r="27" class="ring-fill" id="readinessRingFill" />
+            </svg>
+            <span class="readiness-pct" id="readinessPct">0%</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Views">
+        <button class="tab-btn active" data-view="today">Today</button>
+        <button class="tab-btn" data-view="schedule">Schedule</button>
+        <button class="tab-btn" data-view="roadmap">Roadmap</button>
+        <button class="tab-btn" data-view="lists">Lists</button>
+        <button class="tab-btn" data-view="history">History</button>
+      </nav>
+    </header>
+
+    <main class="main">
+
+      <!-- ============ TODAY / TRIAGE VIEW ============ -->
+      <section id="view-today" class="view">
+        <div class="quadrant-grid" id="quadrantGrid"><!-- 4 quadrant columns rendered by app.js --></div>
+      </section>
+
+      <!-- ============ SCHEDULE VIEW ============ -->
+      <section id="view-schedule" class="view hidden">
+        <div class="sched-header">
+          <button class="sched-nav-btn" id="schedPrevWeek" aria-label="Previous week">&#8249;</button>
+          <button class="sched-month-btn" id="schedMonthLabel"></button>
+          <button class="sched-nav-btn" id="schedNextWeek" aria-label="Next week">&#8250;</button>
+        </div>
+        <div class="sched-strip" id="schedStrip"><!-- 7 day cells rendered by app.js --></div>
+        <div class="sched-timeline" id="schedTimeline"><!-- selected day's tasks rendered by app.js --></div>
+      </section>
+
+      <!-- ============ ROADMAP VIEW ============ -->
+      <section id="view-roadmap" class="view hidden">
+        <div class="roadmap-hero">
+          <div class="roadmap-hero-head">
+            <h2>The Road to COO</h2>
+            <button class="weights-toggle" id="weightsToggle" type="button">Adjust weighting</button>
+          </div>
+          <div class="weights-panel hidden" id="weightsPanel"></div>
+          <div class="roadmap-svg-wrap" id="roadmapSvgWrap"><!-- hub-and-spoke svg rendered by app.js --></div>
+        </div>
+        <div class="pillar-cards" id="pillarCards"><!-- 6 pillar detail cards rendered by app.js --></div>
+      </section>
+
+      <!-- ============ LISTS VIEW ============ -->
+      <section id="view-lists" class="view hidden">
+        <div class="lists-toolbar">
+          <div class="segmented" id="listsTermToggle">
+            <button class="segmented-btn active" data-term="short">Short-run</button>
+            <button class="segmented-btn" data-term="long">Long-run</button>
+          </div>
+          <p class="lists-hint" id="listsHint"></p>
+        </div>
+        <div id="listsContent"></div>
+      </section>
+
+      <!-- ============ HISTORY VIEW ============ -->
+      <section id="view-history" class="view hidden">
+        <div class="lists-toolbar">
+          <div class="segmented" id="historyTermToggle">
+            <button class="segmented-btn active" data-term="all">All</button>
+            <button class="segmented-btn" data-term="short">Short-run</button>
+            <button class="segmented-btn" data-term="long">Long-run</button>
+          </div>
+        </div>
+        <div id="historyContent"></div>
+
+        <div class="backup-row">
+          <p class="backup-hint">Your data lives only in this browser. Keep a copy just in case.</p>
+          <div class="backup-buttons">
+            <button type="button" class="btn btn-ghost" id="exportBackupBtn">Export backup</button>
+            <button type="button" class="btn btn-ghost" id="importBackupBtn">Import backup</button>
+            <input type="file" id="importBackupInput" accept="application/json" class="hidden" />
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <button class="fab" id="fabAdd" aria-label="Add task" title="Add task">+</button>
+
+  <!-- ============ TASK EDITOR MODAL ============ -->
+  <div class="modal-overlay hidden" id="taskModalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+      <div class="modal-head">
+        <h3 id="taskModalTitle">New task</h3>
+        <button class="modal-close" id="taskModalClose" aria-label="Close">&times;</button>
+      </div>
+      <form id="taskForm" class="task-form">
+        <label class="field">
+          <span class="field-label">Title</span>
+          <input type="text" id="fieldTitle" required maxlength="200" placeholder="What needs doing?" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Notes <em>(optional)</em></span>
+          <textarea id="fieldNotes" rows="3" maxlength="2000" placeholder="Any detail worth remembering"></textarea>
+        </label>
+
+        <div class="field">
+          <span class="field-label">Quadrant</span>
+          <div class="pill-group" id="fieldQuadrant"></div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Term</span>
+          <div class="segmented" id="fieldTerm">
+            <button type="button" class="segmented-btn active" data-term="short">Short-run</button>
+            <button type="button" class="segmented-btn" data-term="long">Long-run</button>
+          </div>
+        </div>
+
+        <div class="field long-only hidden" id="fieldPillarWrap">
+          <span class="field-label">Milestone (pillar)</span>
+          <select id="fieldPillar"></select>
+        </div>
+
+        <div class="field long-only hidden" id="fieldFocusWrap">
+          <span class="field-label">Focus area <em>(optional)</em></span>
+          <select id="fieldFocus">
+            <option value="">&mdash; none &mdash;</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Schedule <em>(optional)</em></span>
+          <div class="schedule-fields">
+            <input type="date" id="fieldDate" />
+            <input type="time" id="fieldStart" />
+            <span class="schedule-fields-sep">&ndash;</span>
+            <input type="time" id="fieldEnd" />
+            <button type="button" class="btn-clear-date" id="fieldDateClear" title="Clear schedule">&times;</button>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-danger hidden" id="taskDeleteBtn">Delete</button>
+          <div class="modal-actions-right">
+            <button type="button" class="btn btn-ghost" id="taskCancelBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="taskSaveBtn">Save task</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ CELEBRATION PLAQUE ============ -->
+  <div class="celebration hidden" id="celebration">
+    <div class="celebration-plaque">
+      <span class="celebration-mark">&#9670;</span>
+      <div class="celebration-text">
+        <strong id="celebrationTitle">Progress logged</strong>
+        <span id="celebrationDetail"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="pillars.js"></script>
+  <script src="storage.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
