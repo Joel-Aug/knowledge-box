@@ -120,6 +120,66 @@
             <input type="file" id="importBackupInput" accept="application/json" class="hidden" />
           </div>
         </div>
+
+        <div class="sync-row">
+          <div class="sync-head">
+            <h3>Cloud Sync &amp; Calendar</h3>
+            <span class="sync-status" id="syncStatusText">Not connected</span>
+          </div>
+          <p class="sync-hint">
+            Optional: connect a small free backend so tasks follow you across devices, plus a
+            live calendar feed and an iPhone widget.
+            <button type="button" class="link-btn" id="syncHowBtn">How do I set this up?</button>
+          </p>
+
+          <div class="sync-instructions hidden" id="syncInstructions">
+            <ol>
+              <li>Create a free account at <strong>cloudflare.com</strong> (no credit card needed).</li>
+              <li>In the dashboard: <strong>Workers &amp; Pages</strong> &rarr; <strong>Create</strong> &rarr;
+                connect this GitHub repo &rarr; set the root directory to <code>task-planner/worker</code>
+                &rarr; deploy.</li>
+              <li>Open the new Worker &rarr; <strong>Settings</strong> &rarr; <strong>Variables</strong>:
+                add a KV namespace binding named <code>STATE_KV</code> (create a new namespace), and add an
+                environment variable <code>SYNC_KEY</code> set to a password you make up &mdash; mark it
+                "Encrypt". This key is yours alone; it's never stored in the code.</li>
+              <li>Copy the Worker's web address (looks like
+                <code>https://course-to-coo-sync.you.workers.dev</code>) and paste it below along with the
+                same key, then tap Connect.</li>
+            </ol>
+          </div>
+
+          <div class="sync-fields" id="syncSetupFields">
+            <input type="url" id="syncWorkerUrl" placeholder="https://course-to-coo-sync.you.workers.dev" />
+            <input type="password" id="syncKeyInput" placeholder="Your sync key" autocomplete="off" />
+            <button type="button" class="btn btn-primary" id="syncConnectBtn">Connect</button>
+          </div>
+
+          <div class="sync-connected hidden" id="syncConnectedFields">
+            <div class="sync-field-row">
+              <span class="sync-field-label">Worker</span>
+              <code id="syncWorkerDisplay"></code>
+              <button type="button" class="btn btn-ghost btn-sm" id="syncEditBtn">Edit</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="syncNowBtn">Sync now</button>
+              <button type="button" class="btn btn-danger btn-sm" id="syncDisconnectBtn">Disconnect</button>
+            </div>
+
+            <div class="sync-field-row">
+              <span class="sync-field-label">Calendar feed</span>
+              <input type="text" id="syncCalendarUrl" readonly />
+              <button type="button" class="btn btn-ghost btn-sm" id="syncCopyCalendarBtn">Copy link</button>
+              <a id="syncSubscribeLink" class="btn btn-ghost btn-sm" href="#">Subscribe</a>
+            </div>
+            <p class="sync-hint">On iPhone: Settings app &rarr; Calendar &rarr; Accounts &rarr; Add Account
+              &rarr; Other &rarr; Add Subscribed Calendar &rarr; paste the link. Or just tap Subscribe.</p>
+
+            <div class="sync-field-row">
+              <span class="sync-field-label">iPhone widget</span>
+              <button type="button" class="btn btn-ghost btn-sm" id="syncCopyWidgetBtn">Copy widget script</button>
+              <span class="sync-hint-inline">Paste into the free "Scriptable" app, then add it as a Home
+                Screen widget.</span>
+            </div>
+          </div>
+        </div>
       </section>
 
     </main>
@@ -205,6 +265,7 @@
 
   <script src="pillars.js"></script>
   <script src="storage.js"></script>
+  <script src="sync.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
