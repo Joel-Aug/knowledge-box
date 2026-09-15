@@ -836,6 +836,150 @@ button, input, textarea, select {
   gap: 8px;
 }
 
+.sync-row {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.sync-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.sync-head h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 0;
+  color: var(--parchment);
+}
+
+.sync-status {
+  font-size: 0.74rem;
+  color: var(--parchment-faint);
+}
+
+.sync-status.syncing { color: var(--brass); }
+.sync-status.ok { color: var(--delegate); }
+.sync-status.error { color: var(--do); }
+
+.sync-hint {
+  font-size: 0.76rem;
+  color: var(--parchment-faint);
+  margin: 4px 0 12px;
+  line-height: 1.5;
+}
+
+.sync-hint-inline {
+  font-size: 0.74rem;
+  color: var(--parchment-faint);
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--brass);
+  font-size: 0.76rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.sync-instructions {
+  background: var(--ink-panel);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.sync-instructions ol {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--parchment-dim);
+  line-height: 1.5;
+}
+
+.sync-instructions code {
+  background: var(--ink-panel-alt);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 0.78rem;
+  color: var(--brass-bright);
+}
+
+.sync-fields {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sync-fields input {
+  flex: 1 1 200px;
+  background: var(--ink-panel);
+  border: 1px solid var(--line);
+  color: var(--parchment);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+}
+
+.sync-fields input:focus {
+  outline: none;
+  border-color: var(--brass);
+}
+
+.sync-connected {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sync-field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sync-field-label {
+  flex: none;
+  font-size: 0.76rem;
+  color: var(--parchment-faint);
+  min-width: 92px;
+}
+
+.sync-field-row code {
+  font-size: 0.8rem;
+  color: var(--parchment-dim);
+  overflow-wrap: anywhere;
+}
+
+.sync-field-row input[type="text"] {
+  flex: 1 1 180px;
+  min-width: 0;
+  background: var(--ink-panel);
+  border: 1px solid var(--line);
+  color: var(--parchment-dim);
+  padding: 6px 9px;
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.76rem;
+}
+
 /* ============================== ROADMAP VIEW ================================ */
 
 .roadmap-hero {

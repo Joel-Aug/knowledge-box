@@ -181,6 +181,7 @@ function deleteTask(id) {
 
 function persistAndRerender() {
   saveState(state);
+  onStateMutated();
   renderReadiness();
   if (currentView === "today") renderToday();
   else if (currentView === "schedule") renderSchedule();
@@ -226,6 +227,7 @@ function importBackupFile(file) {
     state.tasks = parsed.tasks;
     state.settings = { ...defaultState().settings, ...(parsed.settings || {}) };
     saveState(state);
+    onStateMutated();
     renderReadiness();
     switchView(currentView);
     alert("Backup restored.");
@@ -650,6 +652,7 @@ function onWeightsPanelInput(e) {
   state.settings.pillarWeights[input.dataset.weight] = parseFloat(input.value);
   input.parentElement.querySelector("[data-weight-value]").textContent = `${input.value}×`;
   saveState(state);
+  onStateMutated();
   renderReadiness();
   document.getElementById("roadmapSvgWrap").innerHTML = buildRoadmapSvg();
 }
@@ -874,6 +877,7 @@ function init() {
   applyTheme();
   renderReadiness();
   renderToday();
+  initSync();
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
   }

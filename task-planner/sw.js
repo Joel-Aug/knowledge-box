@@ -2,17 +2,19 @@
    as a home-screen app, while always preferring a fresh copy when online so
    updates show up without needing to "clear cache". */
 
-const CACHE = "course-to-coo-v2";
+const CACHE = "course-to-coo-v3";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./pillars.js",
   "./storage.js",
+  "./sync.js",
   "./app.js",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
+  "./widget/scriptable-widget.js",
 ];
 
 self.addEventListener("install", (e) => {

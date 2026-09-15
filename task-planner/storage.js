@@ -16,6 +16,7 @@ function defaultState() {
       pillarWeights: weights,
       theme: "auto",
     },
+    updatedAt: null,
   };
 }
 
@@ -44,6 +45,7 @@ function loadState() {
 }
 
 function saveState(state) {
+  state.updatedAt = new Date().toISOString();
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (err) {
