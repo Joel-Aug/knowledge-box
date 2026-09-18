@@ -4,8 +4,6 @@
    the shape of the job, not a to-do list the user invents.
    ========================================================================== */
 
-const FINAL_OBJECTIVE = "Become COO of C-Pharma";
-
 const PILLARS = [
   {
     id: "commercial",

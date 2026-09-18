@@ -555,12 +555,11 @@ function buildRoadmapSvg() {
   }).join("");
 
   return `
-    <svg viewBox="0 0 400 400" role="img" aria-label="Six pillars converging on becoming COO of C-Pharma, ${overall} percent overall">
+    <svg viewBox="0 0 400 400" role="img" aria-label="Roadmap of six pillars, ${overall} percent overall readiness">
       ${nodesSvg}
       <circle cx="${cx}" cy="${cy}" r="${hubR}" fill="var(--ink-panel)" stroke="var(--brass)" stroke-width="1.5" />
-      <text x="${cx}" y="${cy - 16}" text-anchor="middle" class="hub-center-label" font-size="6.5" letter-spacing="1">COO READINESS</text>
-      <text x="${cx}" y="${cy + 10}" text-anchor="middle" class="hub-center-pct" font-size="24">${overall}%</text>
-      <text x="${cx}" y="${cy + 24}" text-anchor="middle" class="hub-center-label" font-size="6" fill="var(--parchment-dim)">${escapeHtml(FINAL_OBJECTIVE)}</text>
+      <text x="${cx}" y="${cy - 8}" text-anchor="middle" class="hub-center-label" font-size="6.5" letter-spacing="1">READINESS</text>
+      <text x="${cx}" y="${cy + 18}" text-anchor="middle" class="hub-center-pct" font-size="24">${overall}%</text>
     </svg>`;
 }
 
