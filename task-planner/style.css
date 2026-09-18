@@ -6,12 +6,14 @@
    ========================================================================== */
 
 /* Two considered palettes, not just an inverted one: dark is ink + parchment
-   + brass; light is paper + ink-brown + a deeper brass so it still reads as
-   the same identity rather than a generic "light mode" recolor. Dark is the
-   base/default; light applies via prefers-color-scheme or a manual choice
-   (data-theme, set by the header toggle and persisted in app state). The
-   explicit [data-theme] blocks are declared after the media query so a
-   manual choice always wins over the system setting. */
+   + brass; light is a neutral white/grey surface system (in the spirit of
+   iOS's own grouped backgrounds) with the same brass accent and quadrant
+   colors, so it still reads as the same identity rather than a generic
+   "light mode" recolor. Dark is the base/default; light applies via
+   prefers-color-scheme or a manual choice (data-theme, set by the header
+   toggle and persisted in app state). The explicit [data-theme] blocks are
+   declared after the media query so a manual choice always wins over the
+   system setting. */
 
 :root {
   --ink: #14161b;
@@ -50,16 +52,16 @@
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --ink: #f6f1e4;
-    --ink-raised: #fffcf5;
-    --ink-panel: #efe8d5;
-    --ink-panel-alt: #e6ddc5;
-    --line: #cdc2a3;
-    --line-soft: #ddd3ba;
+    --ink: #f2f2f7;
+    --ink-raised: #ffffff;
+    --ink-panel: #ececef;
+    --ink-panel-alt: #e2e2e6;
+    --line: #d8d8dd;
+    --line-soft: #e5e5ea;
 
-    --parchment: #241f16;
-    --parchment-dim: #5c5340;
-    --parchment-faint: #8a8069;
+    --parchment: #1c1c1e;
+    --parchment-dim: #6e6e73;
+    --parchment-faint: #9a9aa1;
 
     --brass: #96731a;
     --brass-bright: #7a5c12;
@@ -79,16 +81,16 @@
 }
 
 :root[data-theme="light"] {
-  --ink: #f6f1e4;
-  --ink-raised: #fffcf5;
-  --ink-panel: #efe8d5;
-  --ink-panel-alt: #e6ddc5;
-  --line: #cdc2a3;
-  --line-soft: #ddd3ba;
+  --ink: #f2f2f7;
+  --ink-raised: #ffffff;
+  --ink-panel: #ececef;
+  --ink-panel-alt: #e2e2e6;
+  --line: #d8d8dd;
+  --line-soft: #e5e5ea;
 
-  --parchment: #241f16;
-  --parchment-dim: #5c5340;
-  --parchment-faint: #8a8069;
+  --parchment: #1c1c1e;
+  --parchment-dim: #6e6e73;
+  --parchment-faint: #9a9aa1;
 
   --brass: #96731a;
   --brass-bright: #7a5c12;
