@@ -1,7 +1,7 @@
 {
-  "name": "Course to COO",
-  "short_name": "Course to COO",
-  "description": "Triage tasks on an Eisenhower matrix while long-run tasks build a roadmap toward becoming COO of C-Pharma.",
+  "name": "My Journey",
+  "short_name": "My Journey",
+  "description": "Triage tasks on an Eisenhower matrix while long-run tasks build a roadmap toward your goals.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

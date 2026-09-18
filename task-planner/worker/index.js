@@ -93,10 +93,10 @@ function buildICS(state, { origin }) {
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Course to COO//Task Planner//EN",
+    "PRODID:-//My Journey//Task Planner//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "X-WR-CALNAME:Course to COO",
+    "X-WR-CALNAME:My Journey",
     "X-WR-TIMEZONE:UTC",
   ];
 

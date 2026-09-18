@@ -1,17 +1,17 @@
 // Variables used by Scriptable.
 // icon-color: yellow; icon-glyph: road;
 /* ==========================================================================
-   COURSE TO COO — iPhone home screen widget (Scriptable app)
+   MY JOURNEY — iPhone home screen widget (Scriptable app)
 
    Setup:
    1. Install the free "Scriptable" app from the App Store.
-   2. Open it, tap +, paste this whole file in, name it "Course to COO".
+   2. Open it, tap +, paste this whole file in, name it "My Journey".
       (If you copied this from the app's Cloud Sync panel, the three
       constants below are already filled in with your details — skip to
       step 3.)
    3. Fill in the three constants below if they still say PASTE_...
    4. Long-press your Home Screen -> + -> Scriptable -> add a Small or
-      Medium widget -> tap it -> choose the "Course to COO" script.
+      Medium widget -> tap it -> choose the "My Journey" script.
    ========================================================================== */
 
 const WORKER_URL = "PASTE_YOUR_WORKER_URL_HERE";
@@ -67,7 +67,7 @@ async function run() {
 
   const header = widget.addStack();
   header.centerAlignContent();
-  const title = header.addText("COURSE TO COO");
+  const title = header.addText("MY JOURNEY");
   title.font = Font.boldSystemFont(11);
   title.textColor = COLOR_BRASS;
   header.addSpacer();
