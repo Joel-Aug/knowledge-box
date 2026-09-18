@@ -295,9 +295,64 @@ function taskCardHtml(t, opts = {}) {
     </div>`;
 }
 
+/* =============================== DASHBOARD TILES =============================== */
+
+const DASH_ICONS = {
+  calendar: '<svg viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.5"/><line x1="7" y1="2" x2="7" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="2" x2="13" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  exclaim: '<svg viewBox="0 0 20 20" fill="none"><line x1="10" y1="4" x2="10" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="10" cy="16" r="1.4" fill="currentColor"/></svg>',
+  dot: '<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="currentColor"/></svg>',
+  diamond: '<svg viewBox="0 0 20 20"><path d="M10 3 L17 10 L10 17 L3 10 Z" fill="currentColor"/></svg>',
+  stack: '<svg viewBox="0 0 20 20" fill="none"><line x1="3" y1="5" x2="17" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="15" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  check: '<svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5 L8.5 15 L16 5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+};
+
+const DASH_TILES = [
+  { id: "today", label: "Today", icon: "calendar", cls: "dash-tile-today",
+    count: () => state.tasks.filter((t) => t.dueDate === todayISODate() && t.status === "open").length,
+    onTap: () => { scheduleDate = todayISODate(); switchView("schedule"); } },
+  { id: "donow", label: "Do Now", icon: "exclaim", cls: "dash-tile-donow",
+    count: () => state.tasks.filter((t) => t.quadrant === "ui" && t.status === "open").length,
+    onTap: () => switchView("today") },
+  { id: "short", label: "Short-run", icon: "dot", cls: "dash-tile-short",
+    count: () => state.tasks.filter((t) => t.term === "short" && t.status === "open").length,
+    onTap: () => { listsTerm = "short"; switchView("lists"); } },
+  { id: "long", label: "Long-run", icon: "diamond", cls: "dash-tile-long",
+    count: () => state.tasks.filter((t) => t.term === "long" && t.status === "open").length,
+    onTap: () => { listsTerm = "long"; switchView("lists"); } },
+  { id: "all", label: "All Open", icon: "stack", cls: "dash-tile-all",
+    count: () => state.tasks.filter((t) => t.status === "open").length,
+    onTap: () => switchView("today") },
+  { id: "completed", label: "Completed", icon: "check", cls: "dash-tile-completed",
+    count: () => state.tasks.filter((t) => t.status === "completed").length,
+    onTap: () => { historyTerm = "all"; switchView("history"); } },
+];
+
+function dashTileHtml(tile) {
+  return `
+    <button type="button" class="dash-tile ${tile.cls}" data-dash-id="${tile.id}">
+      <div class="dash-tile-top">
+        <span class="dash-icon">${DASH_ICONS[tile.icon]}</span>
+        <span class="dash-count">${tile.count()}</span>
+      </div>
+      <span class="dash-label">${tile.label}</span>
+    </button>`;
+}
+
+function renderDashboard() {
+  document.getElementById("dashGrid").innerHTML = DASH_TILES.map(dashTileHtml).join("");
+}
+
+function onDashGridClick(e) {
+  const btn = e.target.closest("[data-dash-id]");
+  if (!btn) return;
+  const tile = DASH_TILES.find((t) => t.id === btn.dataset.dashId);
+  if (tile) tile.onTap();
+}
+
 /* ============================ TODAY / TRIAGE VIEW ============================ */
 
 function renderToday() {
+  renderDashboard();
   const grid = document.getElementById("quadrantGrid");
   grid.innerHTML = QUADRANTS.map((q) => quadrantHtml(q)).join("");
 }
@@ -792,6 +847,8 @@ function wireStaticEvents() {
   document.getElementById("themeToggle").addEventListener("click", cycleTheme);
 
   document.body.addEventListener("click", onGlobalTaskClick);
+
+  document.getElementById("dashGrid").addEventListener("click", onDashGridClick);
 
   const grid = document.getElementById("quadrantGrid");
   grid.addEventListener("click", onQuadrantGridClick);
