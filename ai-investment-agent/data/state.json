@@ -790,6 +790,10 @@
     {
       "t": 1789819774128,
       "v": 200.49470515
+    },
+    {
+      "t": 1789823002666,
+      "v": 200.49470515
     }
   ],
   "journal": [
@@ -1631,6 +1635,10 @@
       {
         "t": 1789819774128,
         "p": 336.13
+      },
+      {
+        "t": 1789823002666,
+        "p": 336.13
       }
     ],
     "MSFT": [
@@ -2380,6 +2388,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 493.78
+      },
+      {
+        "t": 1789823002666,
         "p": 493.78
       }
     ],
@@ -3131,6 +3143,10 @@
       {
         "t": 1789819774128,
         "p": 349.54
+      },
+      {
+        "t": 1789823002666,
+        "p": 349.54
       }
     ],
     "AMZN": [
@@ -3880,6 +3896,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 253.71
+      },
+      {
+        "t": 1789823002666,
         "p": 253.71
       }
     ],
@@ -4631,6 +4651,10 @@
       {
         "t": 1789819774128,
         "p": 222.27
+      },
+      {
+        "t": 1789823002666,
+        "p": 222.27
       }
     ],
     "META": [
@@ -5380,6 +5404,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 665.75
+      },
+      {
+        "t": 1789823002666,
         "p": 665.75
       }
     ],
@@ -6131,6 +6159,10 @@
       {
         "t": 1789819774128,
         "p": 364.27
+      },
+      {
+        "t": 1789823002666,
+        "p": 364.27
       }
     ],
     "SPY": [
@@ -6880,6 +6912,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 761.69
+      },
+      {
+        "t": 1789823002666,
         "p": 761.69
       }
     ],
@@ -7631,6 +7667,10 @@
       {
         "t": 1789819774128,
         "p": 721.45
+      },
+      {
+        "t": 1789823002666,
+        "p": 721.45
       }
     ],
     "XLK": [
@@ -8380,6 +8420,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 189.6
+      },
+      {
+        "t": 1789823002666,
         "p": 189.6
       }
     ],
@@ -9131,6 +9175,10 @@
       {
         "t": 1789819774128,
         "p": 55.86
+      },
+      {
+        "t": 1789823002666,
+        "p": 55.86
       }
     ],
     "XLE": [
@@ -9880,6 +9928,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 64.31
+      },
+      {
+        "t": 1789823002666,
         "p": 64.31
       }
     ],
@@ -10631,6 +10683,10 @@
       {
         "t": 1789819774128,
         "p": 168.39
+      },
+      {
+        "t": 1789823002666,
+        "p": 168.39
       }
     ],
     "XLY": [
@@ -11380,6 +11436,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 111.03
+      },
+      {
+        "t": 1789823002666,
         "p": 111.03
       }
     ],
@@ -12131,6 +12191,10 @@
       {
         "t": 1789819774128,
         "p": 82.8
+      },
+      {
+        "t": 1789823002666,
+        "p": 82.8
       }
     ],
     "GLD": [
@@ -12880,6 +12944,10 @@
       },
       {
         "t": 1789819774128,
+        "p": 401.17
+      },
+      {
+        "t": 1789823002666,
         "p": 401.17
       }
     ],
@@ -13631,6 +13699,10 @@
       {
         "t": 1789819774128,
         "p": 81.25
+      },
+      {
+        "t": 1789823002666,
+        "p": 81.25
       }
     ],
     "VNQ": [
@@ -14381,12 +14453,16 @@
       {
         "t": 1789819774128,
         "p": 92.91
+      },
+      {
+        "t": 1789823002666,
+        "p": 92.91
       }
     ]
   },
   "fundamentals": {
     "AAPL": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Fast Grower",
       "pe": 37.627,
       "epsGrowth": 0.3261,
@@ -14408,7 +14484,7 @@
       }
     },
     "MSFT": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Fast Grower",
       "pe": 27.505,
       "epsGrowth": 0.3156,
@@ -14430,7 +14506,7 @@
       }
     },
     "GOOGL": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Fast Grower",
       "pe": 17.3946,
       "epsGrowth": 1.1531,
@@ -14452,7 +14528,7 @@
       }
     },
     "AMZN": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Fast Grower",
       "pe": 20.0217,
       "epsGrowth": 0.8970999999999999,
@@ -14474,7 +14550,7 @@
       }
     },
     "NVDA": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Fast Grower",
       "pe": 27.4662,
       "epsGrowth": 1.2515,
@@ -14496,7 +14572,7 @@
       }
     },
     "META": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Slow Grower",
       "pe": 25.1599,
       "epsGrowth": -0.0369,
@@ -14518,7 +14594,7 @@
       }
     },
     "TSLA": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "Cyclical",
       "pe": 378.0089,
       "epsGrowth": -0.3766,
@@ -14540,7 +14616,7 @@
       }
     },
     "SPY": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14559,7 +14635,7 @@
       }
     },
     "QQQ": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14578,7 +14654,7 @@
       }
     },
     "XLK": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14597,7 +14673,7 @@
       }
     },
     "XLF": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14616,7 +14692,7 @@
       }
     },
     "XLE": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14635,7 +14711,7 @@
       }
     },
     "XLV": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14654,7 +14730,7 @@
       }
     },
     "XLY": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14673,7 +14749,7 @@
       }
     },
     "XLP": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14692,7 +14768,7 @@
       }
     },
     "GLD": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14711,7 +14787,7 @@
       }
     },
     "TLT": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14730,7 +14806,7 @@
       }
     },
     "VNQ": {
-      "updatedAt": 1789798176025,
+      "updatedAt": 1789823002666,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -14766,7 +14842,7 @@
   "dayStartEquity": 200.49470515,
   "sentiment": {
     "global": 0.42857142857142855,
-    "updatedAt": 1789819778860,
+    "updatedAt": 1789823008574,
     "headlineCount": 40,
     "mentions": {
       "AAPL": 0,
@@ -14789,7 +14865,7 @@
       "VNQ": 0
     }
   },
-  "lastPriceUpdate": 1789819774128,
+  "lastPriceUpdate": 1789823002666,
   "lastFetchError": null,
   "watchlist": [
     "AAPL",
@@ -14851,7 +14927,7 @@
       "sentiment": 0.3,
       "score": 0.060000000000001184,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Fast Grower",
         "pe": 37.627,
         "epsGrowth": 0.3261,
@@ -14895,7 +14971,7 @@
       "sentiment": 0.3,
       "score": 0.05999999999999919,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Fast Grower",
         "pe": 27.505,
         "epsGrowth": 0.3156,
@@ -14939,7 +15015,7 @@
       "sentiment": 0.3,
       "score": 0.06,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Fast Grower",
         "pe": 17.3946,
         "epsGrowth": 1.1531,
@@ -14983,7 +15059,7 @@
       "sentiment": 0.3,
       "score": 0.059999999999999214,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Fast Grower",
         "pe": 20.0217,
         "epsGrowth": 0.8970999999999999,
@@ -15027,7 +15103,7 @@
       "sentiment": 0.3,
       "score": 0.06000000000000089,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Fast Grower",
         "pe": 27.4662,
         "epsGrowth": 1.2515,
@@ -15071,7 +15147,7 @@
       "sentiment": 0.3,
       "score": 0.06,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Slow Grower",
         "pe": 25.1599,
         "epsGrowth": -0.0369,
@@ -15115,7 +15191,7 @@
       "sentiment": 0.3,
       "score": 0.06000000000000327,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "Cyclical",
         "pe": 378.0089,
         "epsGrowth": -0.3766,
@@ -15159,7 +15235,7 @@
       "sentiment": 0.3,
       "score": 0.060000000000002086,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15188,7 +15264,7 @@
       "sentiment": 0.3,
       "score": 0.060000000000002204,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15213,11 +15289,11 @@
       "sma": 189.59999999999994,
       "deviation": 2.9980706150215206e-16,
       "momentum": 0,
-      "volatility": 0.00001149438042178444,
+      "volatility": 0,
       "sentiment": 0.3,
       "score": 0.0599999999999979,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15242,11 +15318,11 @@
       "sma": 55.86,
       "deviation": 0,
       "momentum": 0,
-      "volatility": 0.00007800463392164202,
+      "volatility": 0,
       "sentiment": 0.3,
       "score": 0.06,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15271,11 +15347,11 @@
       "sma": 64.30999999999997,
       "deviation": 4.4194852169808767e-16,
       "momentum": 0,
-      "volatility": 0.00006775841665692222,
+      "volatility": 0,
       "sentiment": 0.3,
       "score": 0.0599999999999969,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15304,7 +15380,7 @@
       "sentiment": 0.3,
       "score": 0.05999999999999763,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15333,7 +15409,7 @@
       "sentiment": 0.3,
       "score": 0.06,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15362,7 +15438,7 @@
       "sentiment": 0.3,
       "score": 0.0599999999999988,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15387,11 +15463,11 @@
       "sma": 401.17,
       "deviation": 0,
       "momentum": 0,
-      "volatility": 0.000027160279544524607,
+      "volatility": 0,
       "sentiment": 0.3,
       "score": 0.06,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15420,7 +15496,7 @@
       "sentiment": 0.3,
       "score": 0.06,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -15449,7 +15525,7 @@
       "sentiment": 0.3,
       "score": 0.06000000000000214,
       "fundamentals": {
-        "updatedAt": 1789798176025,
+        "updatedAt": 1789823002666,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
