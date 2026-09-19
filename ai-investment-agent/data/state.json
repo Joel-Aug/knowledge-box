@@ -818,6 +818,10 @@
     {
       "t": 1789837731712,
       "v": 200.49470515
+    },
+    {
+      "t": 1789841337221,
+      "v": 200.49470515
     }
   ],
   "journal": [
@@ -1687,6 +1691,10 @@
       {
         "t": 1789837731712,
         "p": 336.13
+      },
+      {
+        "t": 1789841337221,
+        "p": 336.13
       }
     ],
     "MSFT": [
@@ -2464,6 +2472,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 493.78
+      },
+      {
+        "t": 1789841337221,
         "p": 493.78
       }
     ],
@@ -3243,6 +3255,10 @@
       {
         "t": 1789837731712,
         "p": 349.54
+      },
+      {
+        "t": 1789841337221,
+        "p": 349.54
       }
     ],
     "AMZN": [
@@ -4020,6 +4036,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 253.71
+      },
+      {
+        "t": 1789841337221,
         "p": 253.71
       }
     ],
@@ -4799,6 +4819,10 @@
       {
         "t": 1789837731712,
         "p": 222.27
+      },
+      {
+        "t": 1789841337221,
+        "p": 222.27
       }
     ],
     "META": [
@@ -5576,6 +5600,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 665.75
+      },
+      {
+        "t": 1789841337221,
         "p": 665.75
       }
     ],
@@ -6355,6 +6383,10 @@
       {
         "t": 1789837731712,
         "p": 364.27
+      },
+      {
+        "t": 1789841337221,
+        "p": 364.27
       }
     ],
     "SPY": [
@@ -7132,6 +7164,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 761.69
+      },
+      {
+        "t": 1789841337221,
         "p": 761.69
       }
     ],
@@ -7911,6 +7947,10 @@
       {
         "t": 1789837731712,
         "p": 721.45
+      },
+      {
+        "t": 1789841337221,
+        "p": 721.45
       }
     ],
     "XLK": [
@@ -8688,6 +8728,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 189.6
+      },
+      {
+        "t": 1789841337221,
         "p": 189.6
       }
     ],
@@ -9467,6 +9511,10 @@
       {
         "t": 1789837731712,
         "p": 55.86
+      },
+      {
+        "t": 1789841337221,
+        "p": 55.86
       }
     ],
     "XLE": [
@@ -10244,6 +10292,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 64.31
+      },
+      {
+        "t": 1789841337221,
         "p": 64.31
       }
     ],
@@ -11023,6 +11075,10 @@
       {
         "t": 1789837731712,
         "p": 168.39
+      },
+      {
+        "t": 1789841337221,
+        "p": 168.39
       }
     ],
     "XLY": [
@@ -11800,6 +11856,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 111.03
+      },
+      {
+        "t": 1789841337221,
         "p": 111.03
       }
     ],
@@ -12579,6 +12639,10 @@
       {
         "t": 1789837731712,
         "p": 82.8
+      },
+      {
+        "t": 1789841337221,
+        "p": 82.8
       }
     ],
     "GLD": [
@@ -13356,6 +13420,10 @@
       },
       {
         "t": 1789837731712,
+        "p": 401.17
+      },
+      {
+        "t": 1789841337221,
         "p": 401.17
       }
     ],
@@ -14135,6 +14203,10 @@
       {
         "t": 1789837731712,
         "p": 81.25
+      },
+      {
+        "t": 1789841337221,
+        "p": 81.25
       }
     ],
     "VNQ": [
@@ -14913,6 +14985,10 @@
       {
         "t": 1789837731712,
         "p": 92.91
+      },
+      {
+        "t": 1789841337221,
+        "p": 92.91
       }
     ]
   },
@@ -15297,9 +15373,9 @@
   "dayStartDate": "Sat Sep 19 2026",
   "dayStartEquity": 200.49470515,
   "sentiment": {
-    "global": 0,
-    "updatedAt": 1789837736751,
-    "headlineCount": 0,
+    "global": 0.25,
+    "updatedAt": 1789841342564,
+    "headlineCount": 40,
     "mentions": {
       "AAPL": 0,
       "MSFT": 0,
@@ -15321,7 +15397,7 @@
       "VNQ": 0
     }
   },
-  "lastPriceUpdate": 1789837731712,
+  "lastPriceUpdate": 1789841337221,
   "lastFetchError": null,
   "watchlist": [
     "AAPL",
@@ -15380,8 +15456,8 @@
       "deviation": -1.6911141183711066e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 1.1837798828597745e-15,
+      "sentiment": 0.175,
+      "score": 0.03500000000000118,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Fast Grower",
@@ -15424,8 +15500,8 @@
       "deviation": 1.151189170497145e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": -8.058324193480014e-16,
+      "sentiment": 0.175,
+      "score": 0.03499999999999919,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Fast Grower",
@@ -15468,8 +15544,8 @@
       "deviation": 0,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 0,
+      "sentiment": 0.175,
+      "score": 0.034999999999999996,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Fast Grower",
@@ -15512,8 +15588,8 @@
       "deviation": 1.1202439568958263e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": -7.841707698270783e-16,
+      "sentiment": 0.175,
+      "score": 0.03499999999999921,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Fast Grower",
@@ -15556,8 +15632,8 @@
       "deviation": -1.278702003437441e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 8.950914024062086e-16,
+      "sentiment": 0.175,
+      "score": 0.03500000000000089,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Fast Grower",
@@ -15600,8 +15676,8 @@
       "deviation": 0,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 0,
+      "sentiment": 0.175,
+      "score": 0.034999999999999996,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Slow Grower",
@@ -15644,8 +15720,8 @@
       "deviation": -4.681424673523045e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 3.2769972714661314e-15,
+      "sentiment": 0.175,
+      "score": 0.03500000000000327,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "Cyclical",
@@ -15688,8 +15764,8 @@
       "deviation": -2.985120921152069e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 2.089584644806448e-15,
+      "sentiment": 0.175,
+      "score": 0.035000000000002085,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15717,8 +15793,8 @@
       "deviation": -3.151620700578446e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 2.2061344904049122e-15,
+      "sentiment": 0.175,
+      "score": 0.0350000000000022,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15746,8 +15822,8 @@
       "deviation": 2.9980706150215206e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": -2.0986494305150642e-15,
+      "sentiment": 0.175,
+      "score": 0.0349999999999979,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15775,8 +15851,8 @@
       "deviation": 0,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 0,
+      "sentiment": 0.175,
+      "score": 0.034999999999999996,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15804,8 +15880,8 @@
       "deviation": 4.4194852169808767e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": -3.0936396518866137e-15,
+      "sentiment": 0.175,
+      "score": 0.0349999999999969,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15833,8 +15909,8 @@
       "deviation": 3.3757003896198135e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": -2.362990272733869e-15,
+      "sentiment": 0.175,
+      "score": 0.03499999999999763,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15862,8 +15938,8 @@
       "deviation": 0,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 0,
+      "sentiment": 0.175,
+      "score": 0.034999999999999996,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15891,8 +15967,8 @@
       "deviation": 1.7162868013528995e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": -1.2014007609470295e-15,
+      "sentiment": 0.175,
+      "score": 0.034999999999998796,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15920,8 +15996,8 @@
       "deviation": 0,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 0,
+      "sentiment": 0.175,
+      "score": 0.034999999999999996,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15949,8 +16025,8 @@
       "deviation": 0,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 0,
+      "sentiment": 0.175,
+      "score": 0.034999999999999996,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
@@ -15978,8 +16054,8 @@
       "deviation": -3.0590581670868582e-16,
       "momentum": 0,
       "volatility": 0,
-      "sentiment": 0,
-      "score": 2.1413407169608006e-15,
+      "sentiment": 0.175,
+      "score": 0.03500000000000214,
       "fundamentals": {
         "updatedAt": 1789823002666,
         "category": "ETF/Index",
