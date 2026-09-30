@@ -2030,6 +2030,10 @@
     {
       "t": 1790723393963,
       "v": 201.69512165999996
+    },
+    {
+      "t": 1790726996482,
+      "v": 201.69512165999996
     }
   ],
   "journal": [
@@ -4123,6 +4127,10 @@
       {
         "t": 1790723393963,
         "p": 329.4
+      },
+      {
+        "t": 1790726996482,
+        "p": 329.4
       }
     ],
     "MSFT": [
@@ -6112,6 +6120,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 508.96
+      },
+      {
+        "t": 1790726996482,
         "p": 508.96
       }
     ],
@@ -8103,6 +8115,10 @@
       {
         "t": 1790723393963,
         "p": 340.92
+      },
+      {
+        "t": 1790726996482,
+        "p": 340.92
       }
     ],
     "AMZN": [
@@ -10092,6 +10108,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 246.67
+      },
+      {
+        "t": 1790726996482,
         "p": 246.67
       }
     ],
@@ -12083,6 +12103,10 @@
       {
         "t": 1790723393963,
         "p": 227.21
+      },
+      {
+        "t": 1790726996482,
+        "p": 227.21
       }
     ],
     "META": [
@@ -14072,6 +14096,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 738.79
+      },
+      {
+        "t": 1790726996482,
         "p": 738.79
       }
     ],
@@ -16063,6 +16091,10 @@
       {
         "t": 1790723393963,
         "p": 352.84
+      },
+      {
+        "t": 1790726996482,
+        "p": 352.84
       }
     ],
     "SPY": [
@@ -18052,6 +18084,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 764.2
+      },
+      {
+        "t": 1790726996482,
         "p": 764.2
       }
     ],
@@ -20043,6 +20079,10 @@
       {
         "t": 1790723393963,
         "p": 737.93
+      },
+      {
+        "t": 1790726996482,
+        "p": 737.93
       }
     ],
     "XLK": [
@@ -22032,6 +22072,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 194.5
+      },
+      {
+        "t": 1790726996482,
         "p": 194.5
       }
     ],
@@ -24023,6 +24067,10 @@
       {
         "t": 1790723393963,
         "p": 54.01
+      },
+      {
+        "t": 1790726996482,
+        "p": 54.01
       }
     ],
     "XLE": [
@@ -26012,6 +26060,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 61.54
+      },
+      {
+        "t": 1790726996482,
         "p": 61.54
       }
     ],
@@ -28003,6 +28055,10 @@
       {
         "t": 1790723393963,
         "p": 170.73
+      },
+      {
+        "t": 1790726996482,
+        "p": 170.73
       }
     ],
     "XLY": [
@@ -29992,6 +30048,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 109.15
+      },
+      {
+        "t": 1790726996482,
         "p": 109.15
       }
     ],
@@ -31983,6 +32043,10 @@
       {
         "t": 1790723393963,
         "p": 81.85
+      },
+      {
+        "t": 1790726996482,
+        "p": 81.85
       }
     ],
     "GLD": [
@@ -33972,6 +34036,10 @@
       },
       {
         "t": 1790723393963,
+        "p": 382.89
+      },
+      {
+        "t": 1790726996482,
         "p": 382.89
       }
     ],
@@ -35963,6 +36031,10 @@
       {
         "t": 1790723393963,
         "p": 78.23
+      },
+      {
+        "t": 1790726996482,
+        "p": 78.23
       }
     ],
     "VNQ": [
@@ -37953,22 +38025,26 @@
       {
         "t": 1790723393963,
         "p": 90.53
+      },
+      {
+        "t": 1790726996482,
+        "p": 90.53
       }
     ]
   },
   "fundamentals": {
     "AAPL": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Fast Grower",
-      "pe": 38.4816,
+      "pe": 37.5908,
       "epsGrowth": 0.3261,
       "epsGrowthRecent": 0.2913,
       "growthPct": 32.61,
       "debtEquity": 0.7844,
-      "fcfProxy": 36.2989,
-      "marketCap": 4961437.5,
+      "fcfProxy": 35.4586,
+      "marketCap": 4846581,
       "industry": "Technology",
-      "drawdown": 0.035371179039301245,
+      "drawdown": 0.041048034934497886,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -37980,17 +38056,17 @@
       }
     },
     "MSFT": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Fast Grower",
-      "pe": 28.0019,
+      "pe": 27.9164,
       "epsGrowth": 0.3156,
       "epsGrowthRecent": 0.317,
       "growthPct": 31.56,
       "debtEquity": 0.2416,
-      "fcfProxy": 55.9097,
-      "marketCap": 3745222.2,
+      "fcfProxy": 55.739,
+      "marketCap": 3733787,
       "industry": "Technology",
-      "drawdown": 0.0197203229420173,
+      "drawdown": 0.01695831884729793,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38002,17 +38078,17 @@
       }
     },
     "GOOGL": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Fast Grower",
-      "pe": 17.1647,
+      "pe": 16.9784,
       "epsGrowth": 1.1531,
       "epsGrowthRecent": 2.9432,
       "growthPct": 115.31,
       "debtEquity": 0.1533,
-      "fcfProxy": 65.0594,
-      "marketCap": 4191709,
+      "fcfProxy": 64.3532,
+      "marketCap": 4146214.5,
       "industry": "Media",
-      "drawdown": 0.058293352561080404,
+      "drawdown": 0.05454948833855615,
       "unsustainableGrowth": true,
       "flags": {
         "categoryDowngrade": false,
@@ -38024,17 +38100,17 @@
       }
     },
     "AMZN": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Fast Grower",
-      "pe": 19.5911,
+      "pe": 19.6242,
       "epsGrowth": 0.8970999999999999,
       "epsGrowthRecent": 2.4183000000000003,
       "growthPct": 89.71,
       "debtEquity": 0.2816,
-      "fcfProxy": 168.82,
-      "marketCap": 2650305.2,
+      "fcfProxy": 169.1051,
+      "marketCap": 2654781.5,
       "industry": "Retail",
-      "drawdown": 0.04774587000154384,
+      "drawdown": 0.04790026246719159,
       "unsustainableGrowth": true,
       "flags": {
         "categoryDowngrade": false,
@@ -38046,17 +38122,17 @@
       }
     },
     "NVDA": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Fast Grower",
-      "pe": 29.0319,
+      "pe": 28.7145,
       "epsGrowth": 1.2515,
       "epsGrowthRecent": 1.2821,
       "growthPct": 125.15,
       "debtEquity": 0.1457,
-      "fcfProxy": 44.0895,
-      "marketCap": 5599635,
+      "fcfProxy": 43.6076,
+      "marketCap": 5538421,
       "industry": "Semiconductors",
-      "drawdown": 0.007488204995022247,
+      "drawdown": 0.016534649179760174,
       "unsustainableGrowth": true,
       "flags": {
         "categoryDowngrade": false,
@@ -38068,17 +38144,17 @@
       }
     },
     "META": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Slow Grower",
-      "pe": 28.1192,
+      "pe": 26.7709,
       "epsGrowth": -0.0369,
       "epsGrowthRecent": -0.1344,
       "growthPct": -3.6900000000000004,
       "debtEquity": 0.3203,
-      "fcfProxy": 46.7312,
-      "marketCap": 1914858.4,
+      "fcfProxy": 44.4906,
+      "marketCap": 1823046.4,
       "industry": "Media",
-      "drawdown": 0.07824174693604602,
+      "drawdown": 0.04989776103087754,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38090,17 +38166,17 @@
       }
     },
     "TSLA": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "Cyclical",
-      "pe": 386.1445,
+      "pe": 370.9316,
       "epsGrowth": -0.3766,
       "epsGrowthRecent": -0.053200000000000004,
       "growthPct": -37.66,
       "debtEquity": 0.1076,
-      "fcfProxy": 209.9523,
-      "marketCap": 1469666.1,
+      "fcfProxy": 201.6808,
+      "marketCap": 1411765.8,
       "industry": "Automobiles",
-      "drawdown": 0.07868929626820778,
+      "drawdown": 0.07727712544784124,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38112,7 +38188,7 @@
       }
     },
     "SPY": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38122,7 +38198,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.014726779485854512,
+      "drawdown": 0.012789045342978913,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38131,7 +38207,7 @@
       }
     },
     "QQQ": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38141,7 +38217,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.015198137692986934,
+      "drawdown": 0.012749846145613258,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38150,7 +38226,7 @@
       }
     },
     "XLK": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38160,7 +38236,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.012043294882870087,
+      "drawdown": 0.01163677016108538,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38169,7 +38245,7 @@
       }
     },
     "XLF": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38179,7 +38255,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.061825148032044655,
+      "drawdown": 0.05938697318007669,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38188,7 +38264,7 @@
       }
     },
     "XLE": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38198,7 +38274,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.0661720169594186,
+      "drawdown": 0.06814052089642651,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38207,7 +38283,7 @@
       }
     },
     "XLV": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38217,7 +38293,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.009448267817566806,
+      "drawdown": 0.004257552781990075,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38226,7 +38302,7 @@
       }
     },
     "XLY": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38236,7 +38312,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.038366336633663393,
+      "drawdown": 0.035095473833097586,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38245,7 +38321,7 @@
       }
     },
     "XLP": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38255,7 +38331,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.03717252773188567,
+      "drawdown": 0.03410431909369838,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38264,7 +38340,7 @@
       }
     },
     "GLD": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38274,7 +38350,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.05629920282116874,
+      "drawdown": 0.049122109916308714,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38283,7 +38359,7 @@
       }
     },
     "TLT": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38293,7 +38369,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.04813683567501525,
+      "drawdown": 0.0442272449602931,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38302,7 +38378,7 @@
       }
     },
     "VNQ": {
-      "updatedAt": 1790701807383,
+      "updatedAt": 1790726996482,
       "category": "ETF/Index",
       "pe": null,
       "epsGrowth": null,
@@ -38312,7 +38388,7 @@
       "fcfProxy": null,
       "marketCap": null,
       "industry": null,
-      "drawdown": 0.048312236286919816,
+      "drawdown": 0.04504219409282696,
       "unsustainableGrowth": false,
       "flags": {
         "categoryDowngrade": false,
@@ -38335,11 +38411,11 @@
     "SPY": 1790017721334
   },
   "startDate": 1789276876286,
-  "dayStartDate": "Tue Sep 29 2026",
-  "dayStartEquity": 201.78363942000004,
+  "dayStartDate": "Wed Sep 30 2026",
+  "dayStartEquity": 201.69512165999996,
   "sentiment": {
     "global": 0.2,
-    "updatedAt": 1790723403208,
+    "updatedAt": 1790727002028,
     "headlineCount": 40,
     "mentions": {
       "AAPL": 0,
@@ -38362,7 +38438,7 @@
       "VNQ": 0
     }
   },
-  "lastPriceUpdate": 1790723393963,
+  "lastPriceUpdate": 1790726996482,
   "lastFetchError": null,
   "watchlist": [
     "AAPL",
@@ -38417,24 +38493,24 @@
     "AAPL": {
       "ticker": "AAPL",
       "current": 329.4,
-      "sma": 333.7224999999999,
-      "deviation": -0.012952378098569726,
+      "sma": 333.27249999999987,
+      "deviation": -0.011619620580755658,
       "momentum": -0.026595744680851064,
       "volatility": 0.0035255288163727632,
       "sentiment": 0.13999999999999999,
-      "score": -0.3689220057922815,
+      "score": -0.37825130841697996,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Fast Grower",
-        "pe": 38.4816,
+        "pe": 37.5908,
         "epsGrowth": 0.3261,
         "epsGrowthRecent": 0.2913,
         "growthPct": 32.61,
         "debtEquity": 0.7844,
-        "fcfProxy": 36.2989,
-        "marketCap": 4961437.5,
+        "fcfProxy": 35.4586,
+        "marketCap": 4846581,
         "industry": "Technology",
-        "drawdown": 0.035371179039301245,
+        "drawdown": 0.041048034934497886,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38444,41 +38520,41 @@
           "prevGrowthPct": 32.61,
           "prevDebtEquity": 0.7844
         },
-        "peg": 1.1800551977920883,
-        "lynchScore": 73.93254386136611
+        "peg": 1.1527384237963816,
+        "lynchScore": 75.02521482119438
       },
       "lynch": {
-        "peg": 1.1800551977920883,
-        "pegScore": 82.79779208831647,
+        "peg": 1.1527384237963816,
+        "pegScore": 83.89046304814474,
         "growthBonus": 5,
         "dePenalty": 5,
         "weakBalanceSheet": false,
         "momentumAdj": -8.865248226950355,
-        "lynchScore": 73.93254386136611,
+        "lynchScore": 75.02521482119438,
         "sharpDowntrend": false
       }
     },
     "MSFT": {
       "ticker": "MSFT",
       "current": 508.96,
-      "sma": 508.7969999999999,
-      "deviation": 0.00032036352415613256,
+      "sma": 508.78399999999993,
+      "deviation": 0.00034592282776196696,
       "momentum": -0.0005105848159931812,
       "volatility": 0.0038637423981062505,
       "sentiment": 0.13999999999999999,
-      "score": 0.01639673370436541,
+      "score": 0.01621781857912457,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Fast Grower",
-        "pe": 28.0019,
+        "pe": 27.9164,
         "epsGrowth": 0.3156,
         "epsGrowthRecent": 0.317,
         "growthPct": 31.56,
         "debtEquity": 0.2416,
-        "fcfProxy": 55.9097,
-        "marketCap": 3745222.2,
+        "fcfProxy": 55.739,
+        "marketCap": 3733787,
         "industry": "Technology",
-        "drawdown": 0.0197203229420173,
+        "drawdown": 0.01695831884729793,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38488,41 +38564,41 @@
           "prevGrowthPct": 31.56,
           "prevDebtEquity": 0.2416
         },
-        "peg": 0.8872591888466413,
-        "lynchScore": 95.95721317286919
+        "peg": 0.8845500633713561,
+        "lynchScore": 95.98430442762205
       },
       "lynch": {
-        "peg": 0.8872591888466413,
-        "pegScore": 91.12740811153358,
+        "peg": 0.8845500633713561,
+        "pegScore": 91.15449936628644,
         "growthBonus": 5,
         "dePenalty": 0,
         "weakBalanceSheet": false,
         "momentumAdj": -0.17019493866439375,
-        "lynchScore": 95.95721317286919,
+        "lynchScore": 95.98430442762205,
         "sharpDowntrend": false
       }
     },
     "GOOGL": {
       "ticker": "GOOGL",
       "current": 340.92,
-      "sma": 341.25300000000004,
-      "deviation": -0.0009758155972255974,
+      "sma": 341.16150000000005,
+      "deviation": -0.0007078758886921016,
       "momentum": -0.0053391684901531265,
       "volatility": 0.0020883597202517603,
       "sentiment": 0.13999999999999999,
-      "score": -0.06305404647222816,
+      "score": -0.06492962443196264,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Fast Grower",
-        "pe": 17.1647,
+        "pe": 16.9784,
         "epsGrowth": 1.1531,
         "epsGrowthRecent": 2.9432,
         "growthPct": 115.31,
         "debtEquity": 0.1533,
-        "fcfProxy": 65.0594,
-        "marketCap": 4191709,
+        "fcfProxy": 64.3532,
+        "marketCap": 4146214.5,
         "industry": "Media",
-        "drawdown": 0.058293352561080404,
+        "drawdown": 0.05454948833855615,
         "unsustainableGrowth": true,
         "flags": {
           "categoryDowngrade": false,
@@ -38532,41 +38608,41 @@
           "prevGrowthPct": 115.31,
           "prevDebtEquity": 0.1533
         },
-        "peg": 0.14885699418957593,
-        "lynchScore": 96.7317072280532
+        "peg": 0.14724134940594918,
+        "lynchScore": 96.74786367588946
       },
       "lynch": {
-        "peg": 0.14885699418957593,
-        "pegScore": 98.51143005810424,
+        "peg": 0.14724134940594918,
+        "pegScore": 98.5275865059405,
         "growthBonus": 0,
         "dePenalty": 0,
         "weakBalanceSheet": false,
         "momentumAdj": -1.7797228300510424,
-        "lynchScore": 96.7317072280532,
+        "lynchScore": 96.74786367588946,
         "sharpDowntrend": false
       }
     },
     "AMZN": {
       "ticker": "AMZN",
       "current": 246.67,
-      "sma": 246.55,
-      "deviation": 0.00048671669032640893,
+      "sma": 246.57600000000002,
+      "deviation": 0.00038122120563220126,
       "momentum": 0.0021125330083281812,
       "volatility": 0.001929746319053032,
       "sentiment": 0.13999999999999999,
-      "score": 0.06332275498706513,
+      "score": 0.06406122337992459,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Fast Grower",
-        "pe": 19.5911,
+        "pe": 19.6242,
         "epsGrowth": 0.8970999999999999,
         "epsGrowthRecent": 2.4183000000000003,
         "growthPct": 89.71,
         "debtEquity": 0.2816,
-        "fcfProxy": 168.82,
-        "marketCap": 2650305.2,
+        "fcfProxy": 169.1051,
+        "marketCap": 2654781.5,
         "industry": "Retail",
-        "drawdown": 0.04774587000154384,
+        "drawdown": 0.04790026246719159,
         "unsustainableGrowth": true,
         "flags": {
           "categoryDowngrade": false,
@@ -38576,41 +38652,41 @@
           "prevGrowthPct": 89.71,
           "prevDebtEquity": 0.2816
         },
-        "peg": 0.21838256604614872,
-        "lynchScore": 98.52035200898123
+        "peg": 0.21875153271653103,
+        "lynchScore": 98.51666234227741
       },
       "lynch": {
-        "peg": 0.21838256604614872,
-        "pegScore": 97.8161743395385,
+        "peg": 0.21875153271653103,
+        "pegScore": 97.81248467283469,
         "growthBonus": 0,
         "dePenalty": 0,
         "weakBalanceSheet": false,
         "momentumAdj": 0.7041776694427271,
-        "lynchScore": 98.52035200898123,
+        "lynchScore": 98.51666234227741,
         "sharpDowntrend": false
       }
     },
     "NVDA": {
       "ticker": "NVDA",
       "current": 227.21,
-      "sma": 228.60600000000005,
-      "deviation": -0.006106576380322665,
+      "sma": 228.52350000000007,
+      "deviation": -0.005747767735047211,
       "momentum": -0.007209647819627745,
       "volatility": 0.0022027537285919233,
       "sentiment": 0.13999999999999999,
-      "score": -0.0614308420309167,
+      "score": -0.06394250254784489,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Fast Grower",
-        "pe": 29.0319,
+        "pe": 28.7145,
         "epsGrowth": 1.2515,
         "epsGrowthRecent": 1.2821,
         "growthPct": 125.15,
         "debtEquity": 0.1457,
-        "fcfProxy": 44.0895,
-        "marketCap": 5599635,
+        "fcfProxy": 43.6076,
+        "marketCap": 5538421,
         "industry": "Semiconductors",
-        "drawdown": 0.007488204995022247,
+        "drawdown": 0.016534649179760174,
         "unsustainableGrowth": true,
         "flags": {
           "categoryDowngrade": false,
@@ -38620,41 +38696,41 @@
           "prevGrowthPct": 125.15,
           "prevDebtEquity": 0.1457
         },
-        "peg": 0.23197682780663204,
-        "lynchScore": 95.27701578205776
+        "peg": 0.22944067119456651,
+        "lynchScore": 95.30237734817841
       },
       "lynch": {
-        "peg": 0.23197682780663204,
-        "pegScore": 97.68023172193368,
+        "peg": 0.22944067119456651,
+        "pegScore": 97.70559328805433,
         "growthBonus": 0,
         "dePenalty": 0,
         "weakBalanceSheet": false,
         "momentumAdj": -2.403215939875915,
-        "lynchScore": 95.27701578205776,
+        "lynchScore": 95.30237734817841,
         "sharpDowntrend": false
       }
     },
     "META": {
       "ticker": "META",
       "current": 738.79,
-      "sma": 724.8982300000001,
-      "deviation": 0.019163752131109265,
+      "sma": 726.0567300000002,
+      "deviation": 0.017537568999601058,
       "momentum": 0.032377518794891084,
       "volatility": 0.005868214490067406,
       "sentiment": 0.13999999999999999,
-      "score": 0.44385373508223525,
+      "score": 0.4552370170027926,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Slow Grower",
-        "pe": 28.1192,
+        "pe": 26.7709,
         "epsGrowth": -0.0369,
         "epsGrowthRecent": -0.1344,
         "growthPct": -3.6900000000000004,
         "debtEquity": 0.3203,
-        "fcfProxy": 46.7312,
-        "marketCap": 1914858.4,
+        "fcfProxy": 44.4906,
+        "marketCap": 1823046.4,
         "industry": "Media",
-        "drawdown": 0.07824174693604602,
+        "drawdown": 0.04989776103087754,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38681,24 +38757,24 @@
     "TSLA": {
       "ticker": "TSLA",
       "current": 352.84,
-      "sma": 354.9245,
-      "deviation": -0.0058730800494190966,
+      "sma": 354.6940000000001,
+      "deviation": -0.005227040773173773,
       "momentum": -0.012896908658553682,
-      "volatility": 0.0032937045350372655,
+      "volatility": 0.0032937045350372647,
       "sentiment": 0.13999999999999999,
-      "score": -0.1673317650608839,
+      "score": -0.17185403999460117,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "Cyclical",
-        "pe": 386.1445,
+        "pe": 370.9316,
         "epsGrowth": -0.3766,
         "epsGrowthRecent": -0.053200000000000004,
         "growthPct": -37.66,
         "debtEquity": 0.1076,
-        "fcfProxy": 209.9523,
-        "marketCap": 1469666.1,
+        "fcfProxy": 201.6808,
+        "marketCap": 1411765.8,
         "industry": "Automobiles",
-        "drawdown": 0.07868929626820778,
+        "drawdown": 0.07727712544784124,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38725,14 +38801,14 @@
     "SPY": {
       "ticker": "SPY",
       "current": 764.2,
-      "sma": 764.7065000000002,
-      "deviation": -0.0006623456188749372,
+      "sma": 764.6360000000002,
+      "deviation": -0.0005702059542058562,
       "momentum": -0.001841668734734353,
       "volatility": 0.0006942838101712146,
       "sentiment": 0.13999999999999999,
-      "score": -0.001127507471338586,
+      "score": -0.001772485124022151,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38742,7 +38818,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.014726779485854512,
+        "drawdown": 0.012789045342978913,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38754,14 +38830,14 @@
     "QQQ": {
       "ticker": "QQQ",
       "current": 737.93,
-      "sma": 737.2885,
-      "deviation": 0.0008700800297304934,
+      "sma": 737.3585,
+      "deviation": 0.0007750639614243286,
       "momentum": 0.0019008051267429397,
       "volatility": 0.0009433315116297212,
       "sentiment": 0.13999999999999999,
-      "score": 0.056757533782173776,
+      "score": 0.05742264626031693,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38771,7 +38847,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.015198137692986934,
+        "drawdown": 0.012749846145613258,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38783,14 +38859,14 @@
     "XLK": {
       "ticker": "XLK",
       "current": 194.5,
-      "sma": 194.637,
-      "deviation": -0.0007038743918165634,
+      "sma": 194.63550000000004,
+      "deviation": -0.0006961731030569238,
       "momentum": -0.0001542178584280118,
       "volatility": 0.0013591738708319512,
       "sentiment": 0.13999999999999999,
-      "score": 0.03009979333820239,
+      "score": 0.030045884316884913,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38800,7 +38876,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.012043294882870087,
+        "drawdown": 0.01163677016108538,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38812,14 +38888,14 @@
     "XLF": {
       "ticker": "XLF",
       "current": 54.01,
-      "sma": 54.06750000000001,
-      "deviation": -0.0010634854579925398,
+      "sma": 54.0585,
+      "deviation": -0.0008971762072570309,
       "momentum": -0.003321646060158696,
       "volatility": 0.001265280646244741,
       "sentiment": 0.13999999999999999,
-      "score": -0.025452446230294988,
+      "score": -0.026616610985443552,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38829,7 +38905,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.061825148032044655,
+        "drawdown": 0.05938697318007669,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38841,14 +38917,14 @@
     "XLE": {
       "ticker": "XLE",
       "current": 61.54,
-      "sma": 61.76399999999999,
-      "deviation": -0.003626708114759238,
+      "sma": 61.73599999999999,
+      "deviation": -0.0031748088635478633,
       "momentum": -0.00901771336553949,
       "volatility": 0.0021935778555826914,
       "sentiment": 0.13999999999999999,
-      "score": -0.11193778823157599,
+      "score": -0.11510108299005561,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38858,7 +38934,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.0661720169594186,
+        "drawdown": 0.06814052089642651,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38870,14 +38946,14 @@
     "XLV": {
       "ticker": "XLV",
       "current": 170.73,
-      "sma": 170.69299999999998,
-      "deviation": 0.00021676342908031463,
+      "sma": 170.66649999999998,
+      "deviation": 0.0003720706758502974,
       "momentum": -0.0030947097979680087,
       "volatility": 0.0020366523659717107,
       "sentiment": 0.13999999999999999,
-      "score": -0.030253690299642373,
+      "score": -0.03134084102703225,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38887,7 +38963,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.009448267817566806,
+        "drawdown": 0.004257552781990075,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38899,14 +38975,14 @@
     "XLY": {
       "ticker": "XLY",
       "current": 109.15,
-      "sma": 109.05500000000002,
-      "deviation": 0.0008711200770252133,
+      "sma": 109.06250000000003,
+      "deviation": 0.0008022922636101065,
       "momentum": 0.0013761467889908778,
-      "volatility": 0.0011601570620321153,
+      "volatility": 0.0011601570620321155,
       "sentiment": 0.13999999999999999,
-      "score": 0.047131517258989605,
+      "score": 0.04761331195289535,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38916,7 +38992,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.038366336633663393,
+        "drawdown": 0.035095473833097586,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38928,14 +39004,14 @@
     "XLP": {
       "ticker": "XLP",
       "current": 81.85,
-      "sma": 81.94849999999998,
-      "deviation": -0.0012019744107578197,
+      "sma": 81.92699999999998,
+      "deviation": -0.0009398610958534304,
       "momentum": -0.0052260573650948815,
       "volatility": 0.0020110650302392636,
       "sentiment": 0.13999999999999999,
-      "score": -0.05939723081810144,
+      "score": -0.06123202402243216,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38945,7 +39021,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.03717252773188567,
+        "drawdown": 0.03410431909369838,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38957,14 +39033,14 @@
     "GLD": {
       "ticker": "GLD",
       "current": 382.89,
-      "sma": 380.37350000000004,
-      "deviation": 0.006615865721455229,
+      "sma": 380.62250000000006,
+      "deviation": 0.005957346189465748,
       "momentum": 0.013177740731920195,
       "volatility": 0.0023160011549722644,
       "sentiment": 0.13999999999999999,
-      "score": 0.22328085336835035,
+      "score": 0.22789049009227672,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -38974,7 +39050,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.05629920282116874,
+        "drawdown": 0.049122109916308714,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -38986,14 +39062,14 @@
     "TLT": {
       "ticker": "TLT",
       "current": 78.23,
-      "sma": 78.349,
-      "deviation": -0.0015188451671367825,
+      "sma": 78.32950000000001,
+      "deviation": -0.0012702749283476356,
       "momentum": -0.004960569829559915,
       "volatility": 0.0012072408477461207,
       "sentiment": 0.13999999999999999,
-      "score": -0.052311864038640965,
+      "score": -0.054051855710165006,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -39003,7 +39079,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.04813683567501525,
+        "drawdown": 0.0442272449602931,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
@@ -39015,14 +39091,14 @@
     "VNQ": {
       "ticker": "VNQ",
       "current": 90.53,
-      "sma": 90.50800000000001,
-      "deviation": 0.00024307243558570907,
+      "sma": 90.505,
+      "deviation": 0.00027622783271648733,
       "momentum": -0.0006623247599072996,
       "volatility": 0.0013850098840556318,
       "sentiment": 0.13999999999999999,
-      "score": 0.01415587235259954,
+      "score": 0.013923784572684093,
       "fundamentals": {
-        "updatedAt": 1790701807383,
+        "updatedAt": 1790726996482,
         "category": "ETF/Index",
         "pe": null,
         "epsGrowth": null,
@@ -39032,7 +39108,7 @@
         "fcfProxy": null,
         "marketCap": null,
         "industry": null,
-        "drawdown": 0.048312236286919816,
+        "drawdown": 0.04504219409282696,
         "unsustainableGrowth": false,
         "flags": {
           "categoryDowngrade": false,
