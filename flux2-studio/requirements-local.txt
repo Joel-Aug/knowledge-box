@@ -1,0 +1,10 @@
+# Extra packages for LOCAL GPU mode only (large download, needs an NVIDIA GPU).
+# Install with:  pip install -r requirements.txt -r requirements-local.txt
+# For CUDA builds of torch, follow https://pytorch.org/get-started/locally/ first.
+torch>=2.4
+# FLUX.2 [klein] support landed recently; install diffusers from source to be safe.
+git+https://github.com/huggingface/diffusers.git
+transformers>=4.51
+accelerate>=1.0
+safetensors
+sentencepiece

@@ -25,3 +25,7 @@ Type a keyword and it grows into a tree of related concepts — headers grouping
    ```
 
 Without an API key set, you can still build boxes and add keywords manually — only the "suggest related" AI feature requires one.
+
+## Other apps in this repo
+
+- [`flux2-studio/`](flux2-studio/README.md): text-to-image web app for FLUX.2 [klein] 4B (BFL API or local GPU), with templates for architectural renders and floor plans.

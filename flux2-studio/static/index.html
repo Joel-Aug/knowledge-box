@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLUX.2 Studio</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>FLUX.2 Studio</h1>
+    <span id="mode-badge" class="badge">…</span>
+  </header>
+
+  <div id="problem" class="banner hidden"></div>
+
+  <main class="layout">
+    <section class="panel controls">
+      <label class="field-label">Templates</label>
+      <div id="presets" class="presets"></div>
+
+      <label class="field-label" for="prompt">Prompt</label>
+      <textarea id="prompt" rows="7" placeholder="Describe the image you want… (Ctrl+Enter to generate)"></textarea>
+      <p class="hint">Tip: replace the text in [square brackets] when using a template.</p>
+
+      <label class="field-label">Aspect ratio</label>
+      <div id="aspects" class="aspects"></div>
+
+      <label class="field-label">Reference images <span class="muted">(optional, up to <span id="max-refs">4</span>)</span></label>
+      <div id="dropzone" class="dropzone" tabindex="0">
+        <input id="ref-input" type="file" accept="image/*" multiple hidden>
+        <span>Drop images here or <u>click to browse</u></span>
+      </div>
+      <div id="ref-list" class="ref-list"></div>
+      <p class="hint">With references, describe the edit, e.g. “Restyle image 1 as a winter evening scene” or “Place the sofa from image 2 into the room in image 1”.</p>
+
+      <details class="advanced">
+        <summary>Advanced</summary>
+        <label class="field-label" for="seed">Seed <span class="muted">(blank = random; reuse a seed to get similar results)</span></label>
+        <input id="seed" type="text" inputmode="numeric" placeholder="random">
+      </details>
+
+      <button id="generate" class="primary">Generate</button>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section class="panel gallery-panel">
+      <div class="gallery-head">
+        <h2>Gallery</h2>
+        <span id="count" class="muted"></span>
+      </div>
+      <div id="gallery" class="gallery"></div>
+      <p id="empty" class="muted empty hidden">No images yet. Pick a template or type a prompt, then press Generate.</p>
+    </section>
+  </main>
+
+  <dialog id="viewer">
+    <div class="viewer-body">
+      <img id="viewer-img" alt="">
+      <div class="viewer-side">
+        <p id="viewer-prompt" class="viewer-prompt"></p>
+        <p id="viewer-meta" class="muted small"></p>
+        <div id="viewer-refs" class="viewer-refs"></div>
+        <div class="viewer-actions">
+          <button id="v-reuse">Reuse prompt</button>
+          <button id="v-ref">Use as reference</button>
+          <a id="v-download" class="button" download>Download</a>
+          <button id="v-delete" class="danger">Delete</button>
+          <button id="v-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
