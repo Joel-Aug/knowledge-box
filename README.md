@@ -28,4 +28,5 @@ Without an API key set, you can still build boxes and add keywords manually — 
 
 ## Other apps in this repo
 
+- [`flux2-mobile/`](flux2-mobile/README.md): phone-only version of FLUX.2 Studio. A home-screen web app; your key and gallery stay on the phone, no computer needed.
 - [`flux2-studio/`](flux2-studio/README.md): text-to-image web app for FLUX.2 [klein] 4B (BFL API or local GPU), with templates for architectural renders and floor plans.

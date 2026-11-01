@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#141416">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FLUX Studio">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>FLUX.2 Studio</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>FLUX.2 Studio</h1>
+    <button id="open-settings" class="icon-btn" aria-label="Settings">⚙︎</button>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="create">Create</button>
+    <button class="tab" data-tab="gallery">Gallery <span id="count"></span></button>
+  </nav>
+
+  <div id="banner" class="banner hidden"></div>
+
+  <main>
+    <section id="tab-create" class="tab-page">
+      <label class="field-label">Templates</label>
+      <div id="presets" class="presets"></div>
+
+      <label class="field-label" for="prompt">Prompt</label>
+      <textarea id="prompt" rows="6" placeholder="Describe the image you want…"></textarea>
+      <p class="hint">Using a template? Replace the text in [square brackets].</p>
+
+      <label class="field-label">Aspect ratio</label>
+      <div id="aspects" class="aspects"></div>
+
+      <label class="field-label">Reference images <span class="muted">(optional, up to 4)</span></label>
+      <label class="dropzone">
+        <input id="ref-input" type="file" accept="image/*" multiple hidden>
+        <span>＋ Add photos</span>
+      </label>
+      <div id="ref-list" class="ref-list"></div>
+      <p class="hint">Refer to them in your prompt as “image 1”, “image 2”… e.g. “Render the floor plan in image 1 as an isometric 3D cutaway”.</p>
+
+      <details class="advanced">
+        <summary>Advanced</summary>
+        <label class="field-label" for="seed">Seed <span class="muted">(blank = random)</span></label>
+        <input id="seed" type="text" inputmode="numeric" placeholder="random">
+      </details>
+
+      <div class="gen-bar">
+        <button id="generate" class="primary">Generate</button>
+        <div id="status" class="status"></div>
+      </div>
+    </section>
+
+    <section id="tab-gallery" class="tab-page hidden">
+      <div id="gallery" class="gallery"></div>
+      <p id="empty" class="muted empty">No images yet. Make one in the Create tab.</p>
+      <p class="hint center">Images are stored only on this phone. Use “Save / Share” to copy one to your Photos.</p>
+    </section>
+  </main>
+
+  <dialog id="viewer">
+    <img id="viewer-img" alt="">
+    <div class="viewer-side">
+      <p id="viewer-prompt" class="viewer-prompt"></p>
+      <p id="viewer-meta" class="muted small"></p>
+      <div id="viewer-refs" class="viewer-refs"></div>
+      <div class="viewer-actions">
+        <button id="v-share" class="primary-sm">Save / Share</button>
+        <button id="v-reuse">Reuse prompt</button>
+        <button id="v-ref">Use as reference</button>
+        <button id="v-delete" class="danger">Delete</button>
+        <button id="v-close">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="settings">
+    <form method="dialog" class="settings-form">
+      <h2>Settings</h2>
+      <label class="field-label" for="s-key">BFL API key</label>
+      <input id="s-key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="paste your key from dashboard.bfl.ai">
+      <p class="hint">Saved only on this phone. Get one at <a href="https://dashboard.bfl.ai" target="_blank" rel="noopener">dashboard.bfl.ai</a> → API Keys.</p>
+
+      <label class="field-label" for="s-model">Model</label>
+      <select id="s-model">
+        <option value="flux-2-klein-4b">FLUX.2 [klein] 4B: fastest, cheapest</option>
+        <option value="flux-2-pro">FLUX.2 [pro]: higher quality, costs more</option>
+        <option value="flux-2-flex">FLUX.2 [flex]</option>
+        <option value="flux-2-max">FLUX.2 [max]: best quality, costs most</option>
+      </select>
+
+      <label class="field-label" for="s-relay">Relay URL <span class="muted">(only if needed)</span></label>
+      <input id="s-relay" type="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://flux-relay.yourname.workers.dev">
+      <p class="hint">Leave blank to start. Only fill this in if the app tells you it can't reach BFL directly. See the setup guide.</p>
+
+      <div class="settings-actions">
+        <button value="cancel" formnovalidate>Cancel</button>
+        <button id="s-save" value="save" class="primary-sm">Save</button>
+      </div>
+      <p id="storage-info" class="hint"></p>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
